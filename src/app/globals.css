@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -23,4 +25,555 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tiptap 编辑器样式 */
+.tiptap,
+.tiptap-editor {
+  outline: none;
+  position: relative;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.5;
+}
+
+.tiptap *,
+.tiptap-editor * {
+  box-sizing: border-box;
+}
+
+/* 减少编辑器中的空行 */
+.tiptap > *:first-child,
+.tiptap-editor > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tiptap > *:last-child,
+.tiptap-editor > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #6b7280;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Prose 样式修复 */
+.prose {
+  max-width: none;
+}
+
+/* 减少 prose 中的默认间距 */
+.prose > * + * {
+  margin-top: 0.5em;
+}
+
+.prose p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* 编辑器中的段落间距 */
+.tiptap p,
+.tiptap-editor p,
+.my-paragraph {
+  margin-top: 0.25em !important;
+  margin-bottom: 0.25em !important;
+  line-height: 1.6 !important;
+}
+
+/* 空段落最小高度 */
+.tiptap p:empty,
+.tiptap-editor p:empty {
+  min-height: 1em !important;
+}
+
+.prose h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+  line-height: 1.3;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+  line-height: 1.3;
+}
+
+.prose h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+  line-height: 1.3;
+}
+
+/* 编辑器中的标题间距 */
+.tiptap h1,
+.tiptap h2,
+.tiptap h3,
+.tiptap-editor h1,
+.tiptap-editor h2,
+.tiptap-editor h3,
+.my-heading {
+  margin-top: 0.5em !important;
+  margin-bottom: 0.25em !important;
+  line-height: 1.3 !important;
+}
+
+/* 空标题最小高度 */
+.tiptap h1:empty,
+.tiptap h2:empty,
+.tiptap h3:empty {
+  min-height: 1em !important;
+}
+
+.prose ul, .prose ol {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding-left: 2em;
+}
+
+/* 编辑器中的列表间距 */
+.tiptap ul,
+.tiptap ol,
+.tiptap-editor ul,
+.tiptap-editor ol {
+  margin-top: 0.25em !important;
+  margin-bottom: 0.25em !important;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+/* 编辑器中的列表项间距 */
+.tiptap li,
+.tiptap-editor li {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+}
+
+.prose blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  font-style: italic;
+  color: #9ca3af;
+}
+
+/* 编辑器中的引用间距 */
+.tiptap blockquote,
+.tiptap-editor blockquote {
+  margin-top: 0.25em !important;
+  margin-bottom: 0.25em !important;
+}
+
+.prose code {
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.875em;
+}
+
+/* 代码块样式 */
+.prose pre {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 0.5em;
+  padding: 0.75em;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875em;
+  color: #e2e8f0;
+  font-family: 'Monaco', 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+.prose strong {
+  font-weight: bold;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 0.5em;
+}
+
+/* Prose 反色主题 */
+.prose-invert h1,
+.prose-invert h2,
+.prose-invert h3,
+.prose-invert h4,
+.prose-invert h5,
+.prose-invert h6 {
+  color: #ffffff;
+}
+
+.prose-invert p,
+.prose-invert li {
+  color: #e5e7eb;
+}
+
+.prose-invert strong {
+  color: #ffffff;
+}
+
+.prose-invert code {
+  color: #60a5fa;
+}
+
+.prose-invert blockquote {
+  color: #9ca3af;
+  border-left-color: #3b82f6;
+}
+
+.prose-invert pre {
+  background-color: #0f172a;
+  border-color: #1e293b;
+}
+
+
+/* Tiptap 编辑器代码块样式 */
+.tiptap pre,
+.tiptap .code-block {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid #1e293b !important;
+  overflow-x: auto !important;
+  font-family: 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  margin: 0.5rem 0 !important;
+  white-space: pre !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+}
+
+.tiptap pre code,
+.tiptap .code-block code {
+  background: none !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+}
+
+/* 代码块内的滚动条样式 */
+.tiptap pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tiptap pre::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.tiptap pre::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.tiptap pre::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* 3D 动画效果 */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0px) translateX(20px);
+  }
+  75% {
+    transform: translateY(20px) translateX(10px);
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-30px) translateX(-15px);
+  }
+  66% {
+    transform: translateY(15px) translateX(15px);
+  }
+}
+
+@keyframes float-fast {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-40px) rotate(180deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3), 0 0 40px rgba(96, 165, 250, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(96, 165, 250, 0.5), 0 0 60px rgba(96, 165, 250, 0.3);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 6s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Web3 Toast 样式 */
+.web3-toast-success,
+.web3-toast-error,
+.web3-toast-warning,
+.web3-toast-info,
+.web3-toast-loading,
+.web3-toast-promise,
+.web3-toast-custom {
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  font-family: inherit;
+}
+
+/* Toast 确认对话框按钮样式 */
+[data-sonner-toast] [data-button] {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-sonner-toast] [data-button]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+[data-sonner-toast] [data-button]:hover::before {
+  left: 100%;
+}
+
+/* 确认按钮 - 渐变蓝色 */
+[data-sonner-toast] [data-button]:first-of-type {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+[data-sonner-toast] [data-button]:first-of-type:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+[data-sonner-toast] [data-button]:first-of-type:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+/* 取消按钮 - 灰色边框 */
+[data-sonner-toast] [data-button]:last-of-type {
+  background: rgba(17, 24, 39, 0.8);
+  color: #d1d5db;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+[data-sonner-toast] [data-button]:last-of-type:hover {
+  background: rgba(31, 41, 55, 0.9);
+  color: #f3f4f6;
+  border-color: rgba(107, 114, 128, 0.7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Toast 描述文字样式优化 */
+[data-sonner-toast] [data-description] {
+  color: rgba(209, 213, 219, 0.8);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Toast 标题样式优化 */
+[data-sonner-toast] [data-title] {
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
+/* 文章预览页面代码块基础样式 */
+article pre,
+.article-content pre {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid #1e293b !important;
+  overflow-x: auto !important;
+  font-family: 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  margin: 0.5rem 0 !important;
+  white-space: pre !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+}
+
+article pre code,
+.article-content pre code {
+  background: none !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+  display: block !important;
+}
+
+/* highlight.js 主题覆盖（确保在深色背景下正确显示） */
+.article-content .hljs {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+/* 确保 highlight.js 的颜色类正确应用 */
+.article-content pre code.hljs {
+  padding: 0 !important;
+}
+
+
+.article-content code:not(pre code),
+.prose code:not(pre code) {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  font-family: 'Monaco', 'Courier New', monospace;
+}
+
+/* 代码块滚动条 */
+.article-content pre::-webkit-scrollbar,
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.article-content pre::-webkit-scrollbar-track,
+.prose pre::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.article-content pre::-webkit-scrollbar-thumb,
+.prose pre::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.article-content pre::-webkit-scrollbar-thumb:hover,
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
