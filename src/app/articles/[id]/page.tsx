@@ -7,6 +7,8 @@ import Link from "next/link";
 import { ArrowLeft, Eye, Heart, Calendar, Edit, Home } from "lucide-react";
 import type { Article } from "@/lib/database/articles";
 import { web3Toast } from "@/lib/toast";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
@@ -54,6 +56,7 @@ export default function ArticlePreviewPage() {
   const [liked, setLiked] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentReady, setContentReady] = useState(false);
+  const [renderHtml, setRenderHtml] = useState<string>("");
 
   // Callback ref：当 DOM 元素准备好时触发
   const handleContentRef = (element: HTMLDivElement | null) => {
@@ -101,6 +104,28 @@ export default function ArticlePreviewPage() {
     checkUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articleId]);
+
+  // 将 Markdown 渲染成 HTML（同时兼容旧文章存的 HTML）
+  useEffect(() => {
+    if (!article) return;
+
+    const raw = (article.content || "").trim();
+    const looksLikeHtml = raw.startsWith("<") && /<\/?[a-z][\s\S]*>/i.test(raw);
+
+    if (looksLikeHtml) {
+      setRenderHtml(article.content || "<p>暂无内容</p>");
+      return;
+    }
+
+    // marked + DOMPurify：把 Markdown 转成可安全插入的 HTML
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+    });
+
+    const html = marked.parse(raw || "暂无内容") as string;
+    setRenderHtml(DOMPurify.sanitize(html));
+  }, [article]);
 
   // 应用代码高亮 - 使用可靠的异步检测机制
   useEffect(() => {
@@ -395,9 +420,7 @@ export default function ArticlePreviewPage() {
         <div
           ref={handleContentRef}
           className="prose prose-invert prose-lg max-w-none article-content"
-          dangerouslySetInnerHTML={{
-            __html: article.content || "<p>暂无内容</p>",
-          }}
+          dangerouslySetInnerHTML={{ __html: renderHtml }}
         />
 
         {/* 底部操作 */}

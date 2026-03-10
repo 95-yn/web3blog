@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { LogOut, User as UserIcon, Home, Menu, X } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 
@@ -54,8 +55,8 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
   }
 
   const navClasses = transparent
-    ? 'bg-gray-900/50 backdrop-blur-xl border-b border-gray-700/50'
-    : 'bg-gray-900/80 backdrop-blur-xl border-b border-gray-700'
+    ? 'bg-dark-slate/30 backdrop-blur-xl border-b border-neon-blue/20 shadow-neon-blue'
+    : 'bg-dark-slate/60 backdrop-blur-xl border-b border-neon-blue/30 shadow-cyber'
 
   return (
     <nav className={`sticky top-0 z-50 ${navClasses}`}>
@@ -63,11 +64,18 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
         <div className="flex justify-between items-center h-16">
           {/* Logo / 网站名 */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="text-white font-bold text-sm">W3</span>
+            <div className="w-8 h-8 bg-cyber-gradient rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-neon-blue animate-glow-pulse">
+              <Image
+                src="/brand/logo.png"
+                alt="一一的个人小站"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-lg"
+                priority
+              />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Web3 DApp
+            <span className="text-xl font-bold text-neon-blue animate-neon-flicker">
+              一一的个人小站
             </span>
           </Link>
 
@@ -78,12 +86,12 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
             ) : user ? (
               <>
                 {/* 用户信息 */}
-                <div className="flex items-center gap-3 px-3 py-1.5 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <div className="flex items-center gap-3 px-3 py-1.5 bg-dark-slate/80 rounded-lg border border-neon-blue/30 shadow-neon-blue">
+                  <div className="w-7 h-7 rounded-full bg-cyber-gradient flex items-center justify-center animate-glow-pulse">
                     <UserIcon className="w-4 h-4 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm text-white font-medium">
+                    <span className="text-sm text-neon-blue font-medium">
                       {user.user_metadata?.full_name || user.email?.split('@')[0] || '用户'}
                     </span>
                     <span className="text-xs text-gray-400">{user.email}</span>
@@ -93,14 +101,14 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
                 {/* 快捷链接 */}
                 <Link
                   href="/dashboard"
-                  className="px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all"
+                  className="px-3 py-2 text-sm text-gray-300 hover:text-neon-blue hover:bg-dark-slate/50 rounded-lg transition-all border border-transparent hover:border-neon-blue/30"
                 >
                   控制台
                 </Link>
 
                 <Link
                   href="/posts"
-                  className="px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all"
+                  className="px-3 py-2 text-sm text-gray-300 hover:text-neon-green hover:bg-dark-slate/50 rounded-lg transition-all border border-transparent hover:border-neon-green/30"
                 >
                   文章
                 </Link>
@@ -108,7 +116,7 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
                 {/* 退出登录按钮 */}
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-lg hover:shadow-red-500/50 hover:scale-105 transform"
+                  className="btn-cyber flex items-center gap-2 text-sm font-medium rounded-lg"
                 >
                   <LogOut className="w-4 h-4" />
                   退出
@@ -125,13 +133,13 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
                 </Link>
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all"
+                  className="px-4 py-2 text-sm text-gray-300 hover:text-neon-purple hover:bg-dark-slate/50 rounded-lg transition-all border border-transparent hover:border-neon-purple/30"
                 >
                   登录
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-medium rounded-lg transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 transform"
+                  className="btn-cyber px-4 py-2 text-sm font-medium rounded-lg"
                 >
                   注册
                 </Link>

@@ -82,22 +82,22 @@ export default function PostsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-[#020308] to-black flex items-center justify-center">
         <div className="text-white text-xl">加载中...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#020308] to-black">
       {/* 全局导航栏 */}
       <GlobalNav />
 
       {/* 主内容 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <BookOpen className="w-6 h-6 text-blue-500" />
+            <BookOpen className="w-6 h-6 text-cyan-400" />
             <h1 className="text-2xl font-bold text-white">
               文章管理
               {!isUserAdmin && (
@@ -129,17 +129,17 @@ export default function PostsPage() {
         </div>
 
         {articles.length === 0 ? (
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-12 text-center">
-            <BookOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+          <div className="card-cyber-enhanced p-12 text-center">
+            <BookOpen className="w-16 h-16 text-gray-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">
               还没有文章
             </h3>
             <p className="text-gray-400 mb-6">
-              开始创建您的第一篇文章吧！
+              开始创建你的第一篇文章吧
             </p>
             <Link
               href="/posts/new"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 btn-cyber-enhanced rounded-lg"
             >
               <Plus className="w-5 h-5" />
               新建文章
@@ -150,10 +150,10 @@ export default function PostsPage() {
             {articles.map((article) => (
               <div
                 key={article.id}
-                className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-xl border border-gray-700/50 overflow-hidden group hover:border-blue-500/50 transition-all flex flex-col"
+                className="card-cyber-enhanced rounded-xl overflow-hidden group transition-all flex flex-col"
               >
                 {/* 封面图 - 调整为更小的比例 */}
-                <div className="h-40 bg-gray-900 overflow-hidden relative">
+                <div className="h-40 bg-black overflow-hidden relative">
                   {article.cover_image ? (
                     <img
                       src={article.cover_image}
@@ -161,8 +161,8 @@ export default function PostsPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-gray-900">
-                      <BookOpen className="w-12 h-12 text-blue-400/50 mb-2" />
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-orange-900/40 via-amber-900/40 to-black">
+                      <BookOpen className="w-12 h-12 text-orange-400/60 mb-2" />
                       <span className="text-xs text-gray-500">暂无封面</span>
                     </div>
                   )}

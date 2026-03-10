@@ -3,8 +3,8 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Web3 DApp",
-  description: "Modern Web3 DApp with Next.js, Supabase, and Tiptap",
+  title: "一一的个人小站",
+  description: "一一的个人小站：文章、随笔与记录",
 };
 
 export default function RootLayout({

@@ -41,7 +41,7 @@ export default function AnimatedBackground() {
         this.speedY = (Math.random() - 0.5) * 0.5
         this.speedZ = Math.random() * 2 + 1
         
-        const colors = ['#60a5fa', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b']
+        const colors = ['#4a9eff', '#6b46c1', '#00d9a3']
         this.color = colors[Math.floor(Math.random() * colors.length)]
       }
 
@@ -76,7 +76,7 @@ export default function AnimatedBackground() {
 
           // 添加发光效果
           const gradient = ctx.createRadialGradient(x2d, y2d, 0, x2d, y2d, size2d * 3)
-          gradient.addColorStop(0, this.color + '40')
+          gradient.addColorStop(0, this.color + '20')
           gradient.addColorStop(1, this.color + '00')
           ctx.fillStyle = gradient
           ctx.beginPath()
@@ -104,7 +104,7 @@ export default function AnimatedBackground() {
 
           if (distance < 150) {
             ctx.beginPath()
-            ctx.strokeStyle = `rgba(96, 165, 250, ${0.15 * (1 - distance / 150)})`
+            ctx.strokeStyle = `rgba(74, 158, 255, ${0.08 * (1 - distance / 150)})`
             ctx.lineWidth = 0.5
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
@@ -119,7 +119,7 @@ export default function AnimatedBackground() {
     const animate = () => {
       if (!canvas || !ctx) return
       
-      ctx.fillStyle = 'rgba(17, 24, 39, 0.1)'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // 更新和绘制粒子
@@ -146,7 +146,7 @@ export default function AnimatedBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full"
-      style={{ background: 'linear-gradient(to bottom right, #111827, #1f2937, #000000)' }}
+      style={{ background: 'linear-gradient(to bottom right, #000000, #0a0a0a, #000000)' }}
     />
   )
 }

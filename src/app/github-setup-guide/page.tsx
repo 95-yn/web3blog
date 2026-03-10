@@ -42,7 +42,7 @@ export default function GithubSetupGuidePage() {
                 <div className="mt-2 space-y-2">
                   <div className="p-3 bg-gray-900 rounded-lg">
                     <p className="text-sm text-gray-400 mb-1">Application name:</p>
-                    <code className="text-green-400">My Web3 DApp</code>
+                    <code className="text-green-400">一一的个人小站</code>
                     <p className="text-xs text-gray-500 mt-1">（或任何您喜欢的名称）</p>
                   </div>
 
@@ -54,7 +54,7 @@ export default function GithubSetupGuidePage() {
 
                   <div className="p-3 bg-gray-900 rounded-lg">
                     <p className="text-sm text-gray-400 mb-1">Application description:</p>
-                    <code className="text-green-400">Web3 DApp with Supabase Auth</code>
+                    <code className="text-green-400">一一的个人小站（Supabase 登录）</code>
                     <p className="text-xs text-gray-500 mt-1">（可选）</p>
                   </div>
 

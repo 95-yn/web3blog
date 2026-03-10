@@ -1,30 +1,158 @@
+@import "bytemd/dist/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+  --neon-green: #00ff88;
+  --neon-yellow: #fbbf24;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 body {
-  background: var(--background);
+  background: #0a0a0a;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  position: relative;
+  overflow-x: hidden;
+  text-rendering: geometricPrecision;
+}
+
+.clip-corner {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+/* ByteMD 适配深色霓虹主题 */
+.bytemd {
+  background: rgba(10, 10, 15, 0.5);
+  border: 1px solid rgba(74, 158, 255, 0.15);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(74, 158, 255, 0.05);
+  overflow: hidden;
+}
+
+.bytemd .bytemd-toolbar {
+  background: rgba(26, 26, 46, 0.75);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.bytemd .bytemd-toolbar-icon {
+  color: rgba(224, 231, 255, 0.78);
+}
+
+.bytemd .bytemd-toolbar-icon:hover {
+  color: #ffffff;
+  background: rgba(0, 212, 255, 0.12);
+}
+
+.bytemd .bytemd-body {
+  background: rgba(10, 10, 15, 0.25);
+}
+
+.bytemd .CodeMirror {
+  background: transparent;
+  color: rgba(224, 231, 255, 0.88);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.bytemd .CodeMirror-gutters {
+  background: rgba(26, 26, 46, 0.35);
+  border-right: 1px solid rgba(0, 212, 255, 0.12);
+}
+
+.bytemd .bytemd-preview {
+  background: transparent;
+}
+
+.bytemd .bytemd-preview :where(h1, h2, h3) {
+  letter-spacing: 0.02em;
+}
+
+
+/* 更“酷炫”的全局细节 */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: #ffffff;
+}
+
+/* 更像 HUD 的网格底纹（叠在渐变之上） */
+body > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* 统一滚动条风格 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 255, 0.35) rgba(26, 26, 46, 0.35);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(26, 26, 46, 0.35);
+  border-left: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.55), rgba(181, 55, 255, 0.45));
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.25);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.75), rgba(181, 55, 255, 0.6));
+}
+
+/* 更利落的焦点高亮（键盘操作时很关键） */
+:where(a, button, input, textarea, select, [role="button"]):focus-visible {
+  outline: 2px solid rgba(0, 212, 255, 0.55);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.12), 0 0 28px rgba(0, 212, 255, 0.18);
+}
+
+/* 标题更有“霓虹字牌”感觉 */
+h1, h2, h3 {
+  letter-spacing: 0.02em;
+}
+
+/* 修正：你已有的 glitch 动画里用了 random()，浏览器不支持，导致 CSS 无效 */
+@keyframes glitch-anim {
+  0% { clip-path: inset(10% 0 80% 0); }
+  5% { clip-path: inset(30% 0 60% 0); }
+  10% { clip-path: inset(5% 0 85% 0); }
+  15% { clip-path: inset(45% 0 40% 0); }
+  20% { clip-path: inset(20% 0 70% 0); }
+  25% { clip-path: inset(60% 0 25% 0); }
+  30% { clip-path: inset(15% 0 75% 0); }
+  40% { clip-path: inset(55% 0 30% 0); }
+  50% { clip-path: inset(35% 0 50% 0); }
+  60% { clip-path: inset(70% 0 15% 0); }
+  70% { clip-path: inset(25% 0 65% 0); }
+  80% { clip-path: inset(50% 0 35% 0); }
+  90% { clip-path: inset(8% 0 88% 0); }
+  100% { clip-path: inset(40% 0 45% 0); }
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
 }
 
 /* Tiptap 编辑器样式 */
@@ -376,10 +504,119 @@ body {
 
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3), 0 0 40px rgba(96, 165, 250, 0.2);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(181, 55, 255, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(96, 165, 250, 0.5), 0 0 60px rgba(96, 165, 250, 0.3);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 0 60px rgba(181, 55, 255, 0.4);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.95; }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes hologram-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cyber-blink {
+  0%, 49%, 51%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
 
@@ -408,6 +645,22 @@ body {
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
+.animate-neon-flicker {
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 3s linear infinite;
+}
+
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+.animate-border-flow {
+  animation: border-flow 3s ease infinite;
+}
+
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -415,6 +668,370 @@ body {
 .transform-gpu {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* 科幻文字效果 */
+.text-neon-blue {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.text-neon-purple {
+  color: #f0f0f0;
+  text-shadow: 0 0 10px rgba(181, 55, 255, 0.8), 0 0 20px rgba(181, 55, 255, 0.5), 0 0 30px rgba(181, 55, 255, 0.3);
+}
+
+.text-neon-green {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 20px rgba(0, 255, 136, 0.5), 0 0 30px rgba(0, 255, 136, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+}
+
+/* 科幻边框效果 */
+.border-neon {
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.border-cyber {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--dark-slate), var(--dark-slate)) padding-box,
+              linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-green)) border-box;
+  background-size: 200% 200%;
+}
+
+/* 科幻按钮效果 */
+.btn-cyber {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(181, 55, 255, 0.1));
+  border: 1px solid var(--neon-blue);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-cyber:hover::before {
+  left: 100%;
+}
+
+.btn-cyber:hover {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), inset 0 0 20px rgba(0, 212, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 科幻卡片效果 - 暗色玻璃态 */
+.card-cyber {
+  background: rgba(15, 15, 20, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(74, 158, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 158, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card-cyber:hover {
+  border-color: rgba(74, 158, 255, 0.4);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.8), 0 0 30px rgba(74, 158, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+/* 数据流效果 */
+.data-stream {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-stream::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(transparent, var(--neon-blue), transparent);
+  animation: data-stream 3s linear infinite;
+}
+
+/* 矩阵雨效果 */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+/* 全息扫描效果 */
+.hologram-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.hologram-effect::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(0, 255, 255, 0.3), transparent);
+  animation: hologram-scan 3s linear infinite;
+}
+
+/* 增强按钮效果 */
+.btn-cyber-enhanced {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(181, 55, 255, 0.15));
+  border: 2px solid var(--neon-blue);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.btn-cyber-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.btn-cyber-enhanced:hover::before {
+  left: 100%;
+}
+
+.btn-cyber-enhanced:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
+  border-color: var(--hologram-blue);
+}
+
+/* 增强卡片效果 - 暗色玻璃态 */
+.card-cyber-enhanced {
+  background: rgba(15, 15, 20, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(74, 158, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 15px rgba(74, 158, 255, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-cyber-enhanced::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(74, 158, 255, 0.04) 50%, transparent 70%);
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+.card-cyber-enhanced:hover::before {
+  left: 100%;
+}
+
+.card-cyber-enhanced:hover {
+  border-color: rgba(74, 158, 255, 0.5);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.9), 0 0 35px rgba(74, 158, 255, 0.25);
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* 发光文字效果 */
+.text-cyber-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+}
+
+/* 扫描线文字 */
+.text-scan {
+  position: relative;
+  background: linear-gradient(to bottom, transparent 0%, currentColor 50%, transparent 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: cyber-blink 4s infinite;
+}
+
+/* 霓虹边框动画 */
+.border-neon-animated {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--dark-slate), var(--dark-slate)) padding-box,
+              linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-green), var(--neon-blue)) border-box;
+  background-size: 300% 300%;
+  animation: border-flow 4s ease infinite;
+}
+
+/* 数据网格背景 */
+.grid-cyber {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* 脉冲圆环效果 */
+.pulse-ring {
+  position: relative;
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--neon-blue);
+  border-radius: 50%;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* 故障效果 */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--cyber-pink);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--neon-blue);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+  5% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+  10% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+  15% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+  20% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+  100% {
+    clip: rect(random(100) + px, 9999px, random(100) + px, 0);
+  }
+}
+
+/* 霓虹输入框 */
+.input-cyber {
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-cyber:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.1);
+  background: rgba(26, 26, 46, 0.8);
+}
+
+/* 加载动画 */
+.loader-cyber {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 212, 255, 0.2);
+  border-top-color: var(--neon-blue);
+  border-radius: 50%;
+  animation: spin-fast 1s linear infinite;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+@keyframes spin-fast {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 六边形容器 */
+.hexagon-container {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(181, 55, 255, 0.2));
+  border: 2px solid var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.hexagon-container:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+  transform: scale(1.05);
+}
+
+/* 进度条 */
+.progress-cyber {
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-cyber-bar {
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
+  background-size: 200% 100%;
+  animation: gradient-shift 2s ease infinite;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  transition: width 0.3s ease;
 }
 
 /* Web3 Toast 样式 */

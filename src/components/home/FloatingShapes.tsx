@@ -63,8 +63,8 @@ export default function FloatingShapes() {
           position: absolute;
           width: 100px;
           height: 100px;
-          background: linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(139, 92, 246, 0.3));
-          border: 2px solid rgba(96, 165, 250, 0.5);
+          background: linear-gradient(135deg, rgba(74, 158, 255, 0.15), rgba(107, 70, 193, 0.15));
+          border: 1px solid rgba(74, 158, 255, 0.3);
           backdrop-filter: blur(10px);
         }
         
@@ -80,10 +80,10 @@ export default function FloatingShapes() {
           width: 120px;
           height: 120px;
           border-radius: 50%;
-          background: radial-gradient(circle at 30% 30%, rgba(236, 72, 153, 0.6), rgba(139, 92, 246, 0.3));
-          box-shadow: 
-            0 0 40px rgba(236, 72, 153, 0.4),
-            inset -10px -10px 40px rgba(0, 0, 0, 0.3);
+          background: radial-gradient(circle at 30% 30%, rgba(107, 70, 193, 0.3), rgba(74, 158, 255, 0.15));
+          box-shadow:
+            0 0 30px rgba(107, 70, 193, 0.2),
+            inset -10px -10px 40px rgba(0, 0, 0, 0.5);
           animation: pulseSphere 3s ease-in-out infinite;
         }
 
@@ -91,7 +91,7 @@ export default function FloatingShapes() {
           width: 100%;
           height: 100%;
           border-radius: 50%;
-          background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 60%);
+          background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
         }
 
         /* 金字塔 */
@@ -115,7 +115,7 @@ export default function FloatingShapes() {
           height: 0;
           border-left: 40px solid transparent;
           border-right: 40px solid transparent;
-          border-bottom: 80px solid rgba(16, 185, 129, 0.4);
+          border-bottom: 80px solid rgba(0, 217, 163, 0.25);
           border-top: 0;
         }
 
@@ -123,10 +123,10 @@ export default function FloatingShapes() {
         .pyramid-right { transform: rotateY(90deg) rotateX(60deg) translateZ(20px); }
         .pyramid-back { transform: rotateY(180deg) rotateX(60deg) translateZ(20px); }
         .pyramid-left { transform: rotateY(-90deg) rotateX(60deg) translateZ(20px); }
-        .pyramid-bottom { 
+        .pyramid-bottom {
           width: 80px;
           height: 80px;
-          background: rgba(16, 185, 129, 0.3);
+          background: rgba(0, 217, 163, 0.2);
           border: none;
           transform: translateZ(-40px);
         }
@@ -135,11 +135,11 @@ export default function FloatingShapes() {
         .ring {
           width: 150px;
           height: 150px;
-          border: 8px solid rgba(245, 158, 11, 0.5);
+          border: 6px solid rgba(255, 107, 26, 0.3);
           border-radius: 50%;
-          box-shadow: 
-            0 0 30px rgba(245, 158, 11, 0.3),
-            inset 0 0 30px rgba(245, 158, 11, 0.2);
+          box-shadow:
+            0 0 20px rgba(255, 107, 26, 0.15),
+            inset 0 0 20px rgba(255, 107, 26, 0.1);
         }
 
         /* 动画 */
@@ -154,8 +154,8 @@ export default function FloatingShapes() {
         }
 
         @keyframes pulseSphere {
-          0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(236, 72, 153, 0.4); }
-          50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(236, 72, 153, 0.6); }
+          0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(107, 70, 193, 0.2); }
+          50% { transform: scale(1.1); box-shadow: 0 0 45px rgba(107, 70, 193, 0.35); }
         }
       `}</style>
     </div>
