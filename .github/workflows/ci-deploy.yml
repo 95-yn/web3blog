@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Production
     
     steps:
       - name: Checkout
@@ -53,6 +54,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    environment: Production
     
     steps:
       - name: Checkout
