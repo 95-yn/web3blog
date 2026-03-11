@@ -68,10 +68,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-            # Install Docker if not exists
+            # Install Docker and git if not exists
             if ! command -v docker &> /dev/null; then
               curl -fsSL https://get.docker.com | sh
               sudo usermod -aG docker $USER
+            fi
+            if ! command -v git &> /dev/null; then
+              sudo apt-get update && sudo apt-get install -y git
             fi
             
             # Create project directory and clone code
@@ -86,7 +89,7 @@ jobs:
             fi
             
             # Build and run
-            docker build -t web3blog:latest .
+            docker build --network=host -t web3blog:latest .
             docker stop web3blog 2>/dev/null || true
             docker rm web3blog 2>/dev/null || true
             docker run -d \
