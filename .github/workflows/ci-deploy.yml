@@ -77,15 +77,16 @@ jobs:
               sudo apt-get update && sudo apt-get install -y git
             fi
             
-            # Create project directory and clone code
+            # Create project directory and clone code (only first time)
             mkdir -p ~/web3blog
             cd ~/web3blog
             
-            # Clone or pull latest code
-            if [ -d .git ]; then
-              git pull
+            if [ ! -d .git ]; then
+              rm -rf *
+              git clone --depth 1 https://github.com/95-yn/web3blog.git .
             else
-              git clone https://github.com/95-yn/web3blog.git .
+              git fetch origin main
+              git reset --hard origin/main
             fi
             
             # Build and run
