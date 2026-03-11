@@ -1,13 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Loader2, CheckCircle, XCircle } from 'lucide-react'
 
 export default function TestAuthPage() {
   const [testing, setTesting] = useState(false)
   const [results, setResults] = useState<any[]>([])
-  const supabase = createClient()
 
   const addResult = (name: string, status: 'success' | 'error', message: string, details?: any) => {
     setResults(prev => [...prev, { name, status, message, details }])
@@ -16,6 +14,8 @@ export default function TestAuthPage() {
   const runTests = async () => {
     setResults([])
     setTesting(true)
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       // 测试 1: Supabase 客户端初始化

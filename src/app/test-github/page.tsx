@@ -1,13 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Github, CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react'
 
 export default function TestGithubAuthPage() {
   const [testing, setTesting] = useState(false)
   const [results, setResults] = useState<any[]>([])
-  const supabase = createClient()
 
   const addResult = (name: string, status: 'success' | 'error' | 'warning', message: string, details?: any) => {
     setResults(prev => [...prev, { name, status, message, details }])
@@ -16,6 +14,8 @@ export default function TestGithubAuthPage() {
   const testGithubConfig = async () => {
     setResults([])
     setTesting(true)
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       // 测试 1: 检查环境变量
@@ -58,6 +58,8 @@ export default function TestGithubAuthPage() {
   }
 
   const testGithubLogin = async () => {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     try {
       addResult('GitHub 登录', 'warning', '正在跳转到 GitHub...')
       

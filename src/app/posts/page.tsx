@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import GlobalNav from '@/components/layout/GlobalNav'
@@ -16,7 +15,6 @@ export default function PostsPage() {
   const [loading, setLoading] = useState(true)
   const [isUserAdmin, setIsUserAdmin] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
     checkUser()
@@ -25,6 +23,8 @@ export default function PostsPage() {
   }, [])
 
   async function checkUser() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       router.push('/login')
@@ -39,6 +39,8 @@ export default function PostsPage() {
   }
 
   async function loadArticles() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     try {
       const { data, error } = await supabase
         .from('articles')
@@ -63,6 +65,8 @@ export default function PostsPage() {
     
     if (!confirmed) return
 
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     try {
       const { error } = await supabase
         .from('articles')

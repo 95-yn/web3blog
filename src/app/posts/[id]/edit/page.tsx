@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import GlobalNav from '@/components/layout/GlobalNav'
 import TiptapEditor from '@/components/editor/TiptapEditor'
 import { Save, Eye, ArrowLeft, Trash2, Lock } from 'lucide-react'
@@ -26,7 +25,6 @@ export default function EditPostPage() {
   const [loading, setLoading] = useState(true)
   const [isUserAdmin, setIsUserAdmin] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
     checkUser()
@@ -39,6 +37,8 @@ export default function EditPostPage() {
   }, [user, articleId])
 
   async function checkUser() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       router.push('/login')
@@ -58,6 +58,8 @@ export default function EditPostPage() {
   }
 
   async function loadArticle() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     try {
       const { data, error } = await supabase
         .from('articles')
@@ -95,6 +97,9 @@ export default function EditPostPage() {
     }
 
     setSaving(true)
+
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       const articleStatus = publishNow ? 'published' : status
@@ -136,6 +141,9 @@ export default function EditPostPage() {
     )
     
     if (!confirmed) return
+
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       const { error } = await supabase

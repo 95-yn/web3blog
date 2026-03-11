@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import GlobalNav from '@/components/layout/GlobalNav'
 import TiptapEditor from '@/components/editor/TiptapEditor'
 import { Save, Eye, ArrowLeft, Lock } from 'lucide-react'
@@ -21,13 +20,14 @@ export default function NewPostPage() {
   const [saving, setSaving] = useState(false)
   const [isUserAdmin, setIsUserAdmin] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   useEffect(() => {
     checkUser()
   }, [])
 
   async function checkUser() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       router.push('/login')
@@ -55,6 +55,9 @@ export default function NewPostPage() {
     if (!user) return
 
     setSaving(true)
+
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       const slug = generateSlug(title)

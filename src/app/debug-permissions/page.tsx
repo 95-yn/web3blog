@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { getUserRole, isAdmin } from "@/lib/auth/permissions";
 import GlobalNav from "@/components/layout/GlobalNav";
 import {
@@ -31,6 +30,7 @@ export default function DebugPermissionsPage() {
   }, []);
 
   async function diagnose() {
+    const { createClient } = await import("@/lib/supabase/client")
     const supabase = createClient();
     const info: DebugInfo = {
       user: null,
