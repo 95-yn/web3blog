@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { ArrowLeft, Eye, Heart, Calendar, Edit, Home } from "lucide-react";
 import type { Article } from "@/lib/database/articles";
@@ -48,7 +47,6 @@ hljs.registerLanguage("css", css);
 export default function ArticlePreviewPage() {
   const params = useParams();
   const articleId = params.id as string;
-  const supabase = createClient();
 
   const [article, setArticle] = useState<Article | null>(null);
   const [user, setUser] = useState<{ id: string } | null>(null);
@@ -68,6 +66,8 @@ export default function ArticlePreviewPage() {
   };
 
   async function loadArticle() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     try {
       const { data, error } = await supabase
         .from("articles")
@@ -93,6 +93,8 @@ export default function ArticlePreviewPage() {
   }
 
   async function checkUser() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -296,6 +298,9 @@ export default function ArticlePreviewPage() {
   async function handleLike() {
     if (!article) return;
     if (liked) return;
+
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
 
     try {
       const { data, error } = await supabase

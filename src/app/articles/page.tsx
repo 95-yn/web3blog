@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
 import { Eye, Heart } from "lucide-react";
 import type { Article } from "@/lib/database/articles";
 
 export default function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   async function loadArticles() {
+    const { createClient } = await import("@/lib/supabase/client")
+    const supabase = createClient()
     const { data } = await supabase
       .from("articles")
       .select("*")
