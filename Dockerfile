@@ -19,7 +19,7 @@ RUN pnpm install --frozen-lockfile --prod=false
 # ============================================
 FROM node:20-alpine AS builder
 
-# Install pnpm and prisma
+# Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
@@ -27,12 +27,6 @@ WORKDIR /app
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json pnpm-lock.yaml ./
-
-# Copy Prisma schema
-COPY prisma ./prisma/
-
-# Generate Prisma client
-RUN pnpm prisma generate
 
 # Copy source code
 COPY . .
@@ -59,7 +53,6 @@ COPY --from=builder --chown=nodejs:nodejs /app/.next/standalone ./.next/standalo
 COPY --from=builder --chown=nodejs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nodejs:nodejs /app/public ./public
 COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
-COPY --from=builder --chown=nodejs:nodejs /app/prisma ./prisma
 
 # Set environment
 ENV NODE_ENV=production \
