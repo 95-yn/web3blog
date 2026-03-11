@@ -8,7 +8,7 @@ export default async function TodosPage() {
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/')
   }
 
   return (

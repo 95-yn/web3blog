@@ -131,18 +131,6 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
                   <Home className="w-4 h-4" />
                   首页
                 </Link>
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm text-gray-300 hover:text-neon-purple hover:bg-dark-slate/50 rounded-lg transition-all border border-transparent hover:border-neon-purple/30"
-                >
-                  登录
-                </Link>
-                <Link
-                  href="/register"
-                  className="btn-cyber px-4 py-2 text-sm font-medium rounded-lg"
-                >
-                  注册
-                </Link>
               </>
             )}
           </div>
@@ -224,20 +212,6 @@ export default function GlobalNav({ transparent = false }: GlobalNavProps) {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   首页
-                </Link>
-                <Link
-                  href="/login"
-                  className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-lg mx-2 transition-all"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  登录
-                </Link>
-                <Link
-                  href="/register"
-                  className="block px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg mx-2 text-center transition-all"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  注册
                 </Link>
               </div>
             )}
