@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   ReactNode,
 } from "react";
 
@@ -22,16 +21,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("zh");
-  const [theme, setTheme] = useState<Theme>("dark");
+function getInitialLanguage(): Language {
+  if (typeof window === "undefined") return "zh";
+  return (localStorage.getItem("language") as Language) || "zh";
+}
 
-  useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language;
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedLang) setLanguage(savedLang);
-    if (savedTheme) setTheme(savedTheme);
-  }, []);
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "dark";
+  return (localStorage.getItem("theme") as Theme) || "dark";
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>(getInitialLanguage);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   const toggleLanguage = () => {
     const newLang = language === "zh" ? "en" : "zh";

@@ -11,10 +11,6 @@ export default function ArticlesPage() {
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
-  useEffect(() => {
-    loadArticles();
-  }, []);
-
   async function loadArticles() {
     const { data } = await supabase
       .from("articles")
@@ -24,6 +20,10 @@ export default function ArticlesPage() {
     setArticles(data || []);
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadArticles();
+  }, []);
 
   if (loading) {
     return (
