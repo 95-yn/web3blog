@@ -28,18 +28,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
-      - name: Generate Prisma Client
-        run: pnpm prisma generate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      
       - name: Lint
         run: pnpm lint
       
       - name: Build
         run: pnpm build
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       
@@ -74,7 +68,6 @@ jobs:
             docker rm web3blog || true
             docker run -d \
               --name web3blog \
-              -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
               -e NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }} \
               -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
               web3blog:latest
