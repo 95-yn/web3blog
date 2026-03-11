@@ -2,18 +2,32 @@
 
 import Link from "next/link";
 import ThreeScene from "@/components/home/ThreeScene";
+import { LanguageProvider, useLanguage, translations } from "@/context/LanguageContext";
 
-export default function Home() {
+function HomeContent() {
+  const { language, theme, toggleLanguage, toggleTheme } = useLanguage();
+  const t = translations[language];
+
   return (
-    <main className="h-screen bg-[#000000] text-white overflow-hidden relative">
+    <main className={`h-screen ${theme === 'dark' ? 'bg-[#000000] text-white' : 'bg-[#f8f8f8] text-gray-700'} overflow-hidden relative`}>
       {/* Three.js 3D Background */}
-      <ThreeScene />
+      <ThreeScene isDark={theme === 'dark'} />
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md border-b border-cyan-500/20">
-        <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-white hover:text-cyan-400 transition-colors">一一的空间</Link>
-          <Link href="/articles" className="text-gray-400 hover:text-cyan-400 transition-colors">文章</Link>
+      <nav className={`fixed top-0 left-0 right-0 z-50 ${theme === 'dark' ? 'bg-black/50 border-cyan-500/20' : 'bg-white/50 border-gray-200'} backdrop-blur-md border-b`}>
+        <div className="h-16 max-w-4xl mx-auto flex items-center justify-between px-8">
+          <div className="flex items-center gap-8">
+            <Link href="/" className={`text-xl font-bold ${theme === 'dark' ? 'text-white hover:text-cyan-400' : 'text-gray-900 hover:text-blue-600'} transition-colors`}>{t.title}</Link>
+            <Link href="/articles" className={`${theme === 'dark' ? 'text-gray-400 hover:text-cyan-400' : 'text-gray-600 hover:text-blue-600'} transition-colors text-sm h-full flex items-center`}>{t.articles}</Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <button onClick={toggleLanguage} className={`px-3 py-1 rounded ${theme === 'dark' ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30' : 'bg-blue-100 text-blue-600 hover:bg-blue-200'} transition-colors text-sm`}>
+              {language === 'zh' ? 'EN' : '中'}
+            </button>
+            <button onClick={toggleTheme} className={`px-3 py-1 rounded ${theme === 'dark' ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30' : 'bg-blue-100 text-blue-600 hover:bg-blue-200'} transition-colors text-sm`}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -22,7 +36,7 @@ export default function Home() {
         <div className="text-center space-y-8 px-8 animate-fade-in">
           {/* Avatar */}
           <div className="relative w-32 h-32 mx-auto">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 animate-spin-slow"></div>
+            <div className={`absolute inset-0 rounded-full ${theme === 'dark' ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-gray-300 to-gray-400'} animate-spin-slow`}></div>
             <div className="absolute inset-1 rounded-full overflow-hidden bg-black">
               <img
                 src="/brand/logo.png"
@@ -34,18 +48,17 @@ export default function Home() {
 
           {/* Name & Intro */}
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">欢迎来到一一的空间</h1>
-            <p className="text-gray-400 text-base mb-4">记录学习与思考</p>
-            
+            <h1 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} mb-2`}>{t.welcome}</h1>
+            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} text-base mb-4`}>{t.subtitle}</p>
+
             {/* 个人介绍 */}
-            <div className="max-w-lg mx-auto text-gray-400 text-sm leading-relaxed bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/10">
-              <p className="mb-3">你好！我是专注于前端开发的技术爱好者。</p>
-              <p className="mb-3">热爱 Web3、React、Next.js 等前沿技术，喜欢探索创新的前端交互体验。</p>
-              <p>在这里分享学习笔记、技术思考和项目经验，期待与志同道合的朋友交流学习。</p>
+            <div className={`max-w-lg mx-auto ${theme === 'dark' ? 'text-gray-400 bg-black/30 border-cyan-500/10' : 'text-gray-500 bg-white/60 border-gray-200'} text-sm leading-relaxed backdrop-blur-sm rounded-xl p-5 border`}>
+              <p>{t.intro}</p>
             </div>
           </div>
 
           {/* Navigation */}
+          {/* 
           <div className="flex gap-6 justify-center pt-4">
             <Link href="/articles" className="px-8 py-3 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg text-cyan-400 hover:text-cyan-300 transition-all">
               文章
@@ -54,6 +67,7 @@ export default function Home() {
               动态
             </Link>
           </div>
+          */}
         </div>
       </div>
 
@@ -70,5 +84,13 @@ export default function Home() {
         .animate-fade-in { animation: fade-in 1s ease-out; }
       `}</style>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <HomeContent />
+    </LanguageProvider>
   );
 }

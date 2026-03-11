@@ -3,7 +3,11 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-export default function ThreeScene() {
+interface ThreeSceneProps {
+  isDark?: boolean
+}
+
+export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,11 +32,13 @@ export default function ThreeScene() {
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
 
+    const particleColor = isDark ? 0x00ffff : 0x1a1a1a
+    
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.05,
-      color: 0x00ffff,
+      size: isDark ? 0.05 : 0.15,
+      color: particleColor,
       transparent: true,
-      opacity: 0.8,
+      opacity: isDark ? 0.8 : 0.5,
       blending: THREE.AdditiveBlending
     })
 
@@ -42,10 +48,10 @@ export default function ThreeScene() {
     // Geometric shapes
     const geometry = new THREE.TorusGeometry(10, 3, 16, 100)
     const material = new THREE.MeshBasicMaterial({
-      color: 0x00ffff,
+      color: particleColor,
       wireframe: true,
       transparent: true,
-      opacity: 0.3
+      opacity: isDark ? 0.3 : 0.25
     })
     const torus = new THREE.Mesh(geometry, material)
     scene.add(torus)
