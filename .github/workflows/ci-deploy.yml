@@ -113,10 +113,14 @@ jobs:
             
             docker stop web3blog 2>/dev/null || true
             docker rm web3blog 2>/dev/null || true
+            docker stop web3blog 2>/dev/null || true
+            docker rm web3blog 2>/dev/null || true
             docker run -d \
               --name web3blog \
               --restart unless-stopped \
               -p 3000:3000 \
               -e NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }} \
               -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY || secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} \
+              -e NEXT_PUBLIC_BASE_PATH="" \
+              -e __NEXT_ASSET_PREFIX="" \
               web3blog:latest
