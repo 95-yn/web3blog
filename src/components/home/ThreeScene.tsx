@@ -40,7 +40,7 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
     const particleColor = isDark ? 0x00ffff : 0x1a1a1a
     
     const particlesMaterial = new THREE.PointsMaterial({
-      size: isDark ? 0.05 : 0.15,
+      size: 0.1,
       color: particleColor,
       transparent: true,
       opacity: isDark ? 0.8 : 0.5,
