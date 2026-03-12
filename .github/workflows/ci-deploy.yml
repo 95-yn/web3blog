@@ -15,25 +15,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
+          cache: 'npm'
       
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
       
       - name: Lint
-        run: pnpm lint
+        run: npm run lint
       
       - name: Build
-        run: pnpm build
+        run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY || secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
@@ -89,8 +84,17 @@ jobs:
               git reset --hard origin/main
             fi
             
-            # Build and run
-            docker build --network=host -t web3blog:latest .
+            # Build with retry and memory optimization
+            MAX_RETRIES=3
+            for i in $(seq 1 $MAX_RETRIES); do
+              echo "Build attempt $i of $MAX_RETRIES"
+              docker build --network=host --build-arg NODE_OPTIONS="--max-old-space-size=1024" -t web3blog:latest . && break
+              if [ $i -lt $MAX_RETRIES ]; then
+                echo "Build failed, retrying in 5 seconds..."
+                sleep 5
+              fi
+            done
+            
             docker stop web3blog 2>/dev/null || true
             docker rm web3blog 2>/dev/null || true
             docker run -d \

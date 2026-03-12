@@ -3,24 +3,18 @@
 # ============================================
 FROM node:20-alpine AS deps
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --prod=false
+# Install dependencies (use npm for better compatibility on remote servers)
+RUN npm ci --only=production=false
 
 # ============================================
 # Stage 2: Builder
 # ============================================
 FROM node:20-alpine AS builder
-
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
@@ -32,15 +26,12 @@ COPY package.json pnpm-lock.yaml ./
 COPY . .
 
 # Build the application
-RUN pnpm build
+RUN npm run build
 
 # ============================================
 # Stage 3: Production
 # ============================================
 FROM node:20-alpine AS production
-
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
