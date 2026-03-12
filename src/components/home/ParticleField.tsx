@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function ParticleField() {
+  const { theme } = useLanguage()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -14,6 +16,10 @@ export default function ParticleField() {
 
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+
+    const isDark = theme === 'dark'
+    const particleColor = isDark ? '74, 158, 255' : '59, 130, 246'
+    const lineColor = isDark ? '74, 158, 255' : '37, 99, 235'
 
     const particles: Array<{
       x: number
@@ -46,7 +52,7 @@ export default function ParticleField() {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(74, 158, 255, 0.25)'
+        ctx.fillStyle = `rgba(${particleColor}, 0.25)`
         ctx.fill()
 
         particles.forEach((p2, j) => {
@@ -59,7 +65,7 @@ export default function ParticleField() {
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(74, 158, 255, ${0.08 * (1 - dist / 120)})`
+            ctx.strokeStyle = `rgba(${lineColor}, ${0.08 * (1 - dist / 120)})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -78,7 +84,7 @@ export default function ParticleField() {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [theme])
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />
 }
