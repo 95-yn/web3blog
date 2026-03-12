@@ -26,7 +26,7 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
 
     // Particle system
     const particlesGeometry = new THREE.BufferGeometry()
-    const particlesCount = isDark ? 6000 : 2000
+    const particlesCount = 3000
     const posArray = new Float32Array(particlesCount * 3)
 
     for (let i = 0; i < particlesCount * 3; i++) {
