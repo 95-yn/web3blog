@@ -1,13 +1,18 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function PublicHeader() {
+  const pathname = usePathname()
   const { language, theme, mounted, toggleLanguage, toggleTheme } = useLanguage()
   const isDark = mounted ? theme === 'dark' : true
+  const isHome = pathname === '/'
 
-  const navBg = isDark ? 'bg-black/50' : 'bg-white/50'
+  const navBg = isHome 
+    ? (isDark ? 'bg-black/30' : 'bg-white/30')
+    : (isDark ? 'bg-black/50' : 'bg-white/50')
   const textColor = isDark ? 'text-white' : 'text-gray-900'
   const hoverColor = isDark ? 'hover:text-cyan-400' : 'hover:text-blue-600'
   const borderColor = isDark ? 'border-cyan-500/20' : 'border-gray-200'
