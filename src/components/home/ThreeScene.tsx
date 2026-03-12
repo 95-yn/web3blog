@@ -21,7 +21,7 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     containerRef.current.appendChild(renderer.domElement)
 
     // Particle system
@@ -29,8 +29,10 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
     const particlesCount = 3000
     const posArray = new Float32Array(particlesCount * 3)
 
-    for (let i = 0; i < particlesCount * 3; i++) {
+    for (let i = 0; i < particlesCount * 3; i += 3) {
       posArray[i] = (Math.random() - 0.5) * 100
+      posArray[i + 1] = (Math.random() - 0.5) * 100
+      posArray[i + 2] = (Math.random() - 0.5) * 60 + 20
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
