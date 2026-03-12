@@ -3,6 +3,17 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
+function getScreenSize(width: number): string {
+  if (width >= 2560) return '4K / Ultra Wide'
+  if (width >= 1920) return 'Full HD+'
+  if (width >= 1440) return '2K / QHD'
+  if (width >= 1280) return 'HD / Full HD'
+  if (width >= 1024) return 'Large Tablet'
+  if (width >= 768) return 'Tablet / Laptop'
+  if (width >= 480) return 'Large Mobile'
+  return 'Mobile'
+}
+
 export default function ResolutionPage() {
   const { language, theme, mounted } = useLanguage()
   const isDark = mounted ? theme === 'dark' : true
@@ -36,17 +47,6 @@ export default function ResolutionPage() {
     window.addEventListener('resize', updateResolution)
     return () => window.removeEventListener('resize', updateResolution)
   }, [])
-
-  const getScreenSize = (width: number) => {
-    if (width >= 2560) return '4K / Ultra Wide'
-    if (width >= 1920) return 'Full HD+'
-    if (width >= 1440) return '2K / QHD'
-    if (width >= 1280) return 'HD / Full HD'
-    if (width >= 1024) return 'Large Tablet'
-    if (width >= 768) return 'Tablet / Laptop'
-    if (width >= 480) return 'Large Mobile'
-    return 'Mobile'
-  }
 
   const t = {
     zh: { 
@@ -106,7 +106,7 @@ export default function ResolutionPage() {
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.pixelRatio}</p>
-            <p className={`text-2xl font-bold ${textMain}`}>{mounted ? window.devicePixelRatio : 0}x</p>
+            <p className={`text-2xl font-bold ${textMain}`}>{window.devicePixelRatio}x</p>
           </div>
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
@@ -116,7 +116,7 @@ export default function ResolutionPage() {
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.availSize}</p>
-            <p className={`text-xl font-bold ${textMain}`}>{resolution.width > 0 ? `${window.screen.availWidth} × ${window.screen.availHeight}` : '-'}</p>
+            <p className={`text-xl font-bold ${textMain}`}>{window.screen.availWidth} × {window.screen.availHeight}</p>
           </div>
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
@@ -125,13 +125,8 @@ export default function ResolutionPage() {
           </div>
 
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
-            <p className={`text-sm ${textSub} mb-1`}>{t.pixelDepth}</p>
-            <p className={`text-2xl font-bold ${textMain}`}>{pixelDepth}-bit</p>
-          </div>
-
-          <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm col-span-2`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.touchSupport}</p>
-            <p className={`text-xl font-bold ${textMain}`}>{touchSupport ? '✓ Yes / 是' : '✗ No / 否'}</p>
+            <p className={`text-xl font-bold ${textMain}`}>{touchSupport ? '✓ Yes' : '✗ No'}</p>
           </div>
         </div>
       </div>
