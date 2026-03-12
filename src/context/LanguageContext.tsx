@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
   ReactNode,
 } from "react";
 
@@ -13,6 +14,7 @@ type Theme = "dark" | "light";
 interface LanguageContextType {
   language: Language;
   theme: Theme;
+  mounted: boolean;
   toggleLanguage: () => void;
   toggleTheme: () => void;
 }
@@ -33,7 +35,14 @@ function getInitialTheme(): Theme {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>(getInitialLanguage);
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setLanguage(getInitialLanguage);
+    setTheme(getInitialTheme);
+    setMounted(true);
+  }, []);
 
   const toggleLanguage = () => {
     const newLang = language === "zh" ? "en" : "zh";
@@ -49,7 +58,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider
-      value={{ language, theme, toggleLanguage, toggleTheme }}
+      value={{ language, theme, mounted, toggleLanguage, toggleTheme }}
     >
       {children}
     </LanguageContext.Provider>
