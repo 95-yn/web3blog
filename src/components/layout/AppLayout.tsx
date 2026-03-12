@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <LanguageProvider>
-      <PublicHeader />
+      {!isHome && <PublicHeader />}
       <div className={isHome ? '' : 'pt-16'}>
         {children}
       </div>
