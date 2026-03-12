@@ -23,37 +23,59 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
+// 默认值 - 服务端和客户端初始状态保持一致
+const DEFAULT_LANGUAGE: Language = "zh";
+const DEFAULT_THEME: Theme = "dark";
+
 function getInitialLanguage(): Language {
-  if (typeof window === "undefined") return "zh";
-  return (localStorage.getItem("language") as Language) || "zh";
+  if (typeof window === "undefined") return DEFAULT_LANGUAGE;
+  try {
+    return (localStorage.getItem("language") as Language) || DEFAULT_LANGUAGE;
+  } catch {
+    return DEFAULT_LANGUAGE;
+  }
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  return (localStorage.getItem("theme") as Theme) || "dark";
+  if (typeof window === "undefined") return DEFAULT_THEME;
+  try {
+    return (localStorage.getItem("theme") as Theme) || DEFAULT_THEME;
+  } catch {
+    return DEFAULT_THEME;
+  }
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(getInitialLanguage);
-  const [theme, setTheme] = useState<Theme>("dark");
+  // 初始状态使用固定默认值，避免 hydration mismatch
+  const [language, setLanguage] = useState<Language>(DEFAULT_LANGUAGE);
+  const [theme, setTheme] = useState<Theme>(DEFAULT_THEME);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setLanguage(getInitialLanguage);
-    setTheme(getInitialTheme);
+    // 只有在客户端挂载后才从 localStorage 读取实际值
+    setLanguage(getInitialLanguage());
+    setTheme(getInitialTheme());
     setMounted(true);
   }, []);
 
   const toggleLanguage = () => {
     const newLang = language === "zh" ? "en" : "zh";
     setLanguage(newLang);
-    localStorage.setItem("language", newLang);
+    try {
+      localStorage.setItem("language", newLang);
+    } catch {
+      // 忽略 localStorage 错误
+    }
   };
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch {
+      // 忽略 localStorage 错误
+    }
   };
 
   return (
