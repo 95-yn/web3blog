@@ -37,16 +37,14 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
 
-    // 在浅色模式下使用更亮的颜色和普通混合模式，保证在浅色背景上也清晰可见
-    const particleColor = isDark ? 0x00ffff : 0x3b82f6 // dark: 青色, light: 柔和蓝色
-
+    const particleColor = isDark ? 0x00ffff : 0x1a1a1a
+    
     const particlesMaterial = new THREE.PointsMaterial({
-      size: isDark ? 0.1 : 0.08,
+      size: 0.1,
       color: particleColor,
       transparent: true,
-      opacity: isDark ? 0.8 : 0.7,
-      blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
-      depthWrite: false
+      opacity: isDark ? 0.8 : 0.5,
+      blending: THREE.AdditiveBlending
     })
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial)
@@ -58,7 +56,7 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
       color: particleColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.3 : 0.35
+      opacity: isDark ? 0.3 : 0.25
     })
     const torus = new THREE.Mesh(geometry, material)
     scene.add(torus)
@@ -92,5 +90,5 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
     }
   }, [isDark])
 
-  return <div ref={containerRef} className="fixed inset-0 -z-10" />
+  return <div ref={containerRef} className="fixed inset-0 z-0" />
 }

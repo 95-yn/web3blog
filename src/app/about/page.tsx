@@ -11,14 +11,14 @@ export default function AboutPage() {
       title: '个人介绍', 
       name: '一一',
       role: '全栈开发者',
-      intro: '全栈开发者，热衷于探索新技术。熟悉 React、Vue、Node、Web3 等技术，专注前端工程化与性能优化，对 AI Agent 开发保持持续学习与实践。',
+      intro: '全栈开发者，热衷于探索新技术。熟悉 React、Vue、Node、Web3 等技术，专注前端工程化与性能优化，AI Agent工具开发学习中~',
       contact: '联系方式'
     },
     en: { 
       title: 'About', 
       name: 'Yiyi',
       role: 'Full-stack Developer',
-      intro: 'Full-stack developer passionate about exploring new technologies. Experienced with React, Vue, Node, and Web3, focused on frontend engineering and performance optimization, and continuously learning AI Agent development.',
+      intro: 'Full-stack developer passionate about exploring new technologies. Experienced with React, Vue, Node, and Web3, focused on frontend engineering and performance optimization, learning AI Agent tool development~',
       contact: 'Contact'
     }
   }[language]
@@ -29,7 +29,7 @@ export default function AboutPage() {
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
 
   return (
-    <main className={`min-h-screen ${bg} py-20 px-8`}>
+    <main className={`min-h-screen ${bg} py-24 px-12`}>
       <div className="max-w-4xl mx-auto">
         <h1 className={`text-3xl font-bold ${textMain} mb-8`}>{t.title}</h1>
         
@@ -40,7 +40,7 @@ export default function AboutPage() {
             </div>
             <div>
               <h2 className={`text-2xl font-bold ${textMain}`}>{t.name}</h2>
-              <p className={`${textSub}`}>{t.role}</p>
+              <p className={textSub}>{t.role}</p>
             </div>
           </div>
           

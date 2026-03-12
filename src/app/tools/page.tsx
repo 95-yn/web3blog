@@ -17,7 +17,7 @@ export default function ToolsPage() {
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
 
   return (
-    <main className={`min-h-screen ${bg} py-20 px-8`}>
+    <main className={`min-h-screen ${bg} py-24 px-12`}>
       <div className="max-w-4xl mx-auto">
         <h1 className={`text-3xl font-bold ${textMain} mb-4`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
