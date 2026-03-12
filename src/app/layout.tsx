@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "sonner";
+import AppLayout from "@/components/layout/AppLayout";
 
 export const metadata: Metadata = {
   title: "一一的个人小站",
@@ -15,14 +15,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className="antialiased">
-        {children}
-        <Toaster
-          position="top-right"
-          theme="dark"
-          richColors
-          closeButton
-          className="web3-toast"
-        />
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );
