@@ -1,10 +1,23 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function ParticleField() {
   const { theme } = useLanguage()
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // Force re-render when theme changes
+  const [key, setKey] = useState(0)
+
+  useEffect(() => {
+    setKey(k => k + 1)
+  }, [theme])
+
+  return <ParticleCanvas key={key} theme={theme} />
+}
+
+function ParticleCanvas({ theme }: { theme: 'dark' | 'light' }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
