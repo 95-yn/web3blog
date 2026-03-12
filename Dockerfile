@@ -25,9 +25,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json pnpm-lock.yaml ./
 
-# Copy source code
-COPY . .
-
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -52,14 +49,16 @@ RUN addgroup -g 1001 -S nodejs && \
     adduser -u 1001 -S nodejs -G nodejs
 
 # Copy built artifacts
-COPY --from=builder --chown=nodejs:nodejs /app/.next/standalone ./.next/standalone
-COPY --from=builder --chown=nodejs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nodejs:nodejs /app/.next/standalone ./.next
 COPY --from=builder --chown=nodejs:nodejs /app/public ./public
 COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
+COPY --from=builder --chown=nodejs:nodejs /app/.next/static ./.next/static
 
 # Set environment
 ENV NODE_ENV=production \
-    PORT=3000
+    PORT=3000 \
+    NEXT_PUBLIC_BASE_PATH="" \
+    __NEXT_ASSET_PREFIX=""
 
 # Expose port
 EXPOSE 3000
