@@ -38,11 +38,12 @@ export default function ThreeScene({ isDark = true }: ThreeSceneProps) {
     const particleColor = isDark ? 0x00ffff : 0x1a1a1a
     
     const particlesMaterial = new THREE.PointsMaterial({
-      size: isDark ? 0.05 : 0.15,
+      size: isDark ? 0.03 : 0.08,
       color: particleColor,
       transparent: true,
       opacity: isDark ? 0.8 : 0.5,
-      blending: THREE.AdditiveBlending
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: false
     })
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial)
