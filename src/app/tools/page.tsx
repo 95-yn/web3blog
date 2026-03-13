@@ -40,6 +40,11 @@ export default function ToolsPage() {
       zh: { name: '图片裁剪工具', desc: '上传图片并裁剪所需区域' },
       en: { name: 'Image Cropper', desc: 'Upload and crop your image' },
       href: '/tools/image-crop'
+    },
+    {
+      zh: { name: '二维码生成器', desc: '自定义颜色、样式、Logo' },
+      en: { name: 'QR Code Generator', desc: 'Custom colors, styles and logo' },
+      href: '/tools/qrcode'
     }
   ]
 
