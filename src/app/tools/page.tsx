@@ -40,11 +40,6 @@ export default function ToolsPage() {
       zh: { name: '图片裁剪工具', desc: '上传图片并裁剪所需区域' },
       en: { name: 'Image Cropper', desc: 'Upload and crop your image' },
       href: '/tools/image-crop'
-    },
-    {
-      zh: { name: 'Word 转 PDF', desc: '将 Word 文档转换为 PDF 文件' },
-      en: { name: 'Word to PDF', desc: 'Convert Word documents to PDF' },
-      href: '/tools/word-to-pdf'
     }
   ]
 
