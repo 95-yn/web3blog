@@ -51,10 +51,11 @@ export default function ToolsPage() {
   const bg = isDark ? 'bg-[#000000]' : 'bg-[#f8f8f8]'
   const cardBg = isDark 
     ? 'bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50 shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/20' 
-    : 'bg-white/60 border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
+    : 'bg-white border border-gray-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10'
   const textMain = isDark ? 'text-white' : 'text-gray-900'
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
   const iconBg = isDark ? 'bg-cyan-500/10 text-cyan-400' : 'bg-blue-500/10 text-blue-500'
+  const titleHover = isDark ? 'group-hover:text-cyan-400' : 'group-hover:text-blue-600'
 
   // 工具图标
   const toolIcons: Record<string, JSX.Element> = {
@@ -99,7 +100,7 @@ export default function ToolsPage() {
                   {toolIcons[tool.href]}
                 </div>
                 <div>
-                  <h2 className={`text-lg font-medium ${textMain} mb-1 group-hover:text-cyan-400 transition-colors`}>
+                  <h2 className={`text-lg font-medium ${textMain} mb-1 ${titleHover} transition-colors`}>
                     {language === 'zh' ? tool.zh.name : tool.en.name}
                   </h2>
                   <p className={`text-sm ${textSub}`}>
