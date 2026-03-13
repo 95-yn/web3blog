@@ -16,9 +16,9 @@ export default function Home() {
     <main className={`h-screen ${displayTheme === 'dark' ? 'bg-[#000000] text-white' : 'bg-[#f8f8f8] text-gray-700'} overflow-hidden relative`}>
       <ThreeScene isDark={displayTheme === 'dark'} />
 
-      <div className="relative h-full flex items-center justify-center">
-        <div className="text-center space-y-8 px-8 animate-fade-in">
-          <div className="relative w-32 h-32 mx-auto">
+      <div className="relative h-full flex items-center justify-center px-4">
+        <div className="text-center space-y-4 md:space-y-8 px-2 md:px-8 animate-fade-in">
+          <div className="relative w-24 md:w-32 h-24 md:h-32 mx-auto">
             <div className={`absolute inset-0 rounded-full ${displayTheme === 'dark' ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-gray-300 to-gray-400'} animate-spin-slow`}></div>
             <div className="absolute inset-1 rounded-full overflow-hidden bg-black">
               <img src="/brand/logo.png" alt="Avatar" className="w-full h-full object-cover" />
@@ -26,9 +26,9 @@ export default function Home() {
           </div>
 
           <div>
-            <h1 className={`text-3xl font-bold ${displayTheme === 'dark' ? 'text-white' : 'text-gray-900'} mb-2`}>{t.welcome}</h1>
-            <p className={`${displayTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'} text-base mb-4`}>{t.subtitle}</p>
-            <div className={`max-w-lg mx-auto ${displayTheme === 'dark' ? 'text-gray-400 bg-black/30 border-cyan-500/10' : 'text-gray-500 bg-white/60 border-gray-200'} text-sm leading-relaxed backdrop-blur-sm rounded-xl p-5 border`}>
+            <h1 className={`text-2xl md:text-3xl font-bold ${displayTheme === 'dark' ? 'text-white' : 'text-gray-900'} mb-2`}>{t.welcome}</h1>
+            <p className={`${displayTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'} text-sm md:text-base mb-4`}>{t.subtitle}</p>
+            <div className={`max-w-lg mx-auto ${displayTheme === 'dark' ? 'text-gray-400 bg-black/30 border-cyan-500/10' : 'text-gray-500 bg-white/60 border-gray-200'} text-xs md:text-sm leading-relaxed backdrop-blur-sm rounded-xl p-4 md:p-5 border`}>
               <p>{t.intro}</p>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
+import { useEffect, useState } from 'react'
 
 interface Tool {
   zh: { name: string; desc: string };
@@ -12,6 +13,12 @@ interface Tool {
 export default function ToolsPage() {
   const { language, theme, mounted } = useLanguage()
   const isDark = mounted ? theme === 'dark' : true
+  const [isClient, setIsClient] = useState(false)
+
+  // 防止 hydration 不匹配，同时保持客户端状态
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const t = {
     zh: { title: '小工具集合', desc: '日常实用小工具' },
@@ -42,7 +49,7 @@ export default function ToolsPage() {
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
 
   return (
-    <main className={`min-h-screen ${bg} py-24 px-12`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
       <div className="max-w-4xl mx-auto">
         <h1 className={`text-3xl font-bold ${textMain} mb-4`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
@@ -52,6 +59,7 @@ export default function ToolsPage() {
             <Link 
               key={index}
               href={tool.href}
+              prefetch={true}
               className={`p-6 rounded-xl border ${cardBg} backdrop-blur-sm transition-all hover:scale-[1.02]`}
             >
               <h2 className={`text-lg font-medium ${textMain} mb-2`}>

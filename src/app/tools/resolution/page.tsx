@@ -81,14 +81,21 @@ export default function ResolutionPage() {
   const cardBg = isDark ? 'bg-black/30 border-cyan-500/10' : 'bg-white/60 border-gray-200'
   const textMain = isDark ? 'text-white' : 'text-gray-900'
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
+  const hoverColor = isDark ? 'hover:text-cyan-400' : 'hover:text-blue-600'
 
   return (
-    <main className={`min-h-screen ${bg} py-24 px-12`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
       <div className="max-w-3xl mx-auto">
+        <a href="/tools" className={`inline-flex items-center gap-1 text-sm ${textSub} ${hoverColor} mb-4`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          {language === 'zh' ? '返回工具列表' : 'Back to Tools'}
+        </a>
         <h1 className={`text-3xl font-bold ${textMain} mb-2`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm col-span-2`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.screenResolution}</p>
             <p className={`text-3xl font-bold ${textMain}`}>{resolution.width} × {resolution.height}</p>

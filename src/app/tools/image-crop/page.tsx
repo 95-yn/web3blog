@@ -109,12 +109,19 @@ export default function ImageCropPage() {
   const bg = isDark ? 'bg-[#000000]' : 'bg-[#f8f8f8]'
   const textMain = isDark ? 'text-white' : 'text-gray-900'
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
+  const hoverColor = isDark ? 'hover:text-cyan-400' : 'hover:text-blue-600'
   const btnPrimary = isDark ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border-cyan-500/30' : 'bg-blue-500 text-white hover:bg-blue-600'
   const btnSecondary = isDark ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
 
   return (
-    <main className={`min-h-screen ${bg} py-24 px-12`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
       <div className="max-w-4xl mx-auto">
+        <a href="/tools" className={`inline-flex items-center gap-1 text-sm ${textSub} ${hoverColor} mb-4`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          {language === 'zh' ? '返回工具列表' : 'Back to Tools'}
+        </a>
         <h1 className={`text-3xl font-bold ${textMain} mb-2`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
 

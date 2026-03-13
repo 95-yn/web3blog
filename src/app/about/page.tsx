@@ -29,7 +29,7 @@ export default function AboutPage() {
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
 
   return (
-    <main className={`min-h-screen ${bg} py-24 px-12`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
       <div className="max-w-4xl mx-auto">
         <h1 className={`text-3xl font-bold ${textMain} mb-8`}>{t.title}</h1>
         
