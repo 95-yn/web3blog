@@ -27,6 +27,7 @@ export default function QrCodePage() {
   useEffect(() => {
     if (!isClient) return
     
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const QRCode = require('qr-code-styling')
     qrCode.current = new QRCode({
       width: size,
