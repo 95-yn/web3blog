@@ -2,6 +2,7 @@
 
 import { LanguageProvider } from "@/context/LanguageContext";
 import PublicHeader from "@/components/layout/PublicHeader";
+import Footer from "@/components/layout/Footer";
 import { Toaster } from "sonner";
 import { usePathname } from "next/navigation";
 
@@ -13,6 +14,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <LanguageProvider>
       <PublicHeader />
       <div>{children}</div>
+      <Footer />
       <Toaster
         position="top-right"
         theme="dark"
