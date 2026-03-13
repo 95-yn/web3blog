@@ -3,7 +3,7 @@
 import { useLanguage } from '@/context/LanguageContext'
 
 // 备案信息配置 - 在这里填写你的备案号
-const ICP_LICENSE = '蜀ICP备xxxxxxxx号'  // 替换为你的ICP备案号
+const ICP_LICENSE = '辽ICP备2026004192号'  // 替换为你的ICP备案号
 const POLICE_LICENSE = ''  // 公安备案号（可选）
 const COPYRIGHT_NAME = '一一'
 
@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="flex justify-center gap-4 text-xs text-gray-600">
             {ICP_LICENSE && (
               <a 
-                href="https://beian.miit.gov.cn/" 
+                href="http://beian.miit.gov.cn/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-cyan-400 transition-colors"
