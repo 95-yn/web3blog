@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
+import BackLink from '@/components/BackLink'
 
 export default function JsonFormatPage() {
   const { language, theme, mounted } = useLanguage()
@@ -95,14 +96,9 @@ export default function JsonFormatPage() {
   const btnSecondary = isDark ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
 
   return (
-    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-6`}>
       <div className="max-w-4xl mx-auto">
-        <a href="/tools" className={`inline-flex items-center gap-1 text-sm ${textSub} ${hoverColor} mb-4`}>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {language === 'zh' ? '返回工具列表' : 'Back to Tools'}
-        </a>
+        <BackLink href="/tools" />
         <h1 className={`text-3xl font-bold ${textMain} mb-2`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
 

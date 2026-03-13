@@ -241,6 +241,58 @@ h1, h2, h3 {
   font-size: 0.98rem;
 }
 
+/* 浅色模式文章内容 - 不使用 prose-invert 时 */
+.article-content:not(.prose-invert) {
+  color: #374151;
+}
+
+.article-content:not(.prose-invert) h1 {
+  color: #111827;
+  font-size: 1.75rem;
+}
+
+.article-content:not(.prose-invert) h2 {
+  color: #1f2937;
+  font-size: 1.5rem;
+}
+
+.article-content:not(.prose-invert) h3 {
+  color: #374151;
+  font-size: 1.25rem;
+}
+
+.article-content:not(.prose-invert) a {
+  color: #2563eb;
+}
+
+.article-content:not(.prose-invert) code {
+  background: #f3f4f6;
+  color: #dc2626;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.article-content:not(.prose-invert) pre {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.article-content:not(.prose-invert) pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.article-content:not(.prose-invert) blockquote {
+  border-left: 4px solid #3b82f6;
+  color: #6b7280;
+}
+
 .article-content.prose > * + * {
   margin-top: 1.25em;
 }

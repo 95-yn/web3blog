@@ -1,0 +1,46 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "slug": "frontend-performance-optimization",
+      "title": {
+        "zh": "前端性能优化：思路、防御与监控选型",
+        "en": "Frontend Performance Optimization: Strategy & Monitoring"
+      },
+      "description": {
+        "zh": "系统梳理前端性能优化思路、分片方案、防御机制与监控系统选型实践。",
+        "en": "A systematic overview of frontend performance optimization, task slicing, defense mechanisms, and monitoring options."
+      },
+      "date": "2025-10-11",
+      "tags": ["前端", "性能优化"]
+    },
+    {
+      "id": "2",
+      "slug": "jquery-basics",
+      "title": {
+        "zh": "jQuery 基本用法入门",
+        "en": "jQuery Basics"
+      },
+      "description": {
+        "zh": "jQuery 的核心用法与常见场景",
+        "en": "jQuery core APIs and common use cases."
+      },
+      "date": "2018-09-19",
+      "tags": ["jQuery", "基础"]
+    },
+    {
+      "id": "3",
+      "slug": "ios-cert-types",
+      "title": {
+        "zh": "iOS 证书类型简单入门",
+        "en": "iOS Certificate Types Basics"
+      },
+      "description": {
+        "zh": "梳理常见 iOS 证书、描述文件及典型使用场景。",
+        "en": "A short overview of common iOS certificate types, provisioning profiles, and usage scenarios."
+      },
+      "date": "2018-11-01",
+      "tags": ["iOS", "证书"]
+    }
+  ]
+}

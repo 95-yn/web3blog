@@ -3,6 +3,7 @@
 import { LanguageProvider } from "@/context/LanguageContext";
 import PublicHeader from "@/components/layout/PublicHeader";
 import Footer from "@/components/layout/Footer";
+import ScrollManager from "@/components/ScrollManager";
 import { Toaster } from "sonner";
 import { usePathname } from "next/navigation";
 
@@ -13,6 +14,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <PublicHeader />
+      <ScrollManager />
       <div>{children}</div>
       <Footer />
       <Toaster

@@ -2,7 +2,7 @@
 
 <!-- meta: id=1; date=2025-11-11; tags=前端,性能优化 -->
 
-[掘金地址](https://juejin.cn/post/7570904968678440987)
+<a href="https://juejin.cn/post/7570904968678440987" target="_blank" rel="noopener noreferrer">掘金地址</a>
 
 <div class="article-viewer markdown-body result"><h2 data-id="heading-0">如何系统性地完成前端性能优化</h2>
 <h3 data-id="heading-1">开篇</h3>

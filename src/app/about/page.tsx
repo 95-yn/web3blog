@@ -32,14 +32,14 @@ export default function AboutPage() {
   }[language];
 
   const bg = isDark ? "bg-[#000000]" : "bg-[#f8f8f8]";
-  const cardBg = isDark
-    ? "bg-black/30 border-cyan-500/10"
-    : "bg-white/60 border-gray-200";
+  const cardBg = isDark 
+    ? "bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50" 
+    : "bg-white border border-gray-200 hover:border-blue-400";
   const textMain = isDark ? "text-white" : "text-gray-900";
   const textSub = isDark ? "text-gray-400" : "text-gray-600";
 
   return (
-    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
+    <main className={`min-h-screen ${bg} py-20 px-4 md:px-6`}>
       <div className="max-w-4xl mx-auto">
         <h1 className={`text-3xl font-bold ${textMain} mb-8`}>{t.title}</h1>
 
