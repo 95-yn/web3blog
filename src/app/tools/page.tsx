@@ -49,9 +49,36 @@ export default function ToolsPage() {
   ]
 
   const bg = isDark ? 'bg-[#000000]' : 'bg-[#f8f8f8]'
-  const cardBg = isDark ? 'bg-black/30 border-cyan-500/10 hover:border-cyan-500/30' : 'bg-white/60 border-gray-200 hover:border-gray-300'
+  const cardBg = isDark 
+    ? 'bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50 shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/20' 
+    : 'bg-white/60 border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
   const textMain = isDark ? 'text-white' : 'text-gray-900'
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
+  const iconBg = isDark ? 'bg-cyan-500/10 text-cyan-400' : 'bg-blue-500/10 text-blue-500'
+
+  // 工具图标
+  const toolIcons: Record<string, JSX.Element> = {
+    '/tools/resolution': (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+    '/tools/json-format': (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+    ),
+    '/tools/image-crop': (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+    '/tools/qrcode': (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+      </svg>
+    )
+  }
 
   return (
     <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
@@ -65,14 +92,21 @@ export default function ToolsPage() {
               key={index}
               href={tool.href}
               prefetch={true}
-              className={`p-6 rounded-xl border ${cardBg} backdrop-blur-sm transition-all hover:scale-[1.02]`}
+              className={`p-6 rounded-xl border ${cardBg} backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] group`}
             >
-              <h2 className={`text-lg font-medium ${textMain} mb-2`}>
-                {language === 'zh' ? tool.zh.name : tool.en.name}
-              </h2>
-              <p className={`text-sm ${textSub}`}>
-                {language === 'zh' ? tool.zh.desc : tool.en.desc}
-              </p>
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-lg ${iconBg} group-hover:scale-110 transition-transform duration-300`}>
+                  {toolIcons[tool.href]}
+                </div>
+                <div>
+                  <h2 className={`text-lg font-medium ${textMain} mb-1 group-hover:text-cyan-400 transition-colors`}>
+                    {language === 'zh' ? tool.zh.name : tool.en.name}
+                  </h2>
+                  <p className={`text-sm ${textSub}`}>
+                    {language === 'zh' ? tool.zh.desc : tool.en.desc}
+                  </p>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
