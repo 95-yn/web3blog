@@ -3,10 +3,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import { useLanguage } from "@/context/LanguageContext";
 import articlesData from "@/data/articles.json";
+
+// 从 JSON 读取文章 slug 到文件名的映射（顶层常量，避免 useEffect 依赖告警）
+const idToFileMap: Record<string, string> = articlesData.articles.reduce(
+  (acc: Record<string, string>, article: any) => {
+    acc[article.id] = article.slug + ".md";
+    return acc;
+  },
+  {},
+);
 
 export default function MdArticlePage() {
   const params = useParams();
@@ -17,12 +26,6 @@ export default function MdArticlePage() {
   const [html, setHtml] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // 从 JSON 读取文章 slug 到文件名的映射
-  const idToFileMap: Record<string, string> = articlesData.articles.reduce((acc: Record<string, string>, article: any) => {
-    acc[article.id] = article.slug + ".md";
-    return acc;
-  }, {});
 
   useEffect(() => {
     const fileName = idToFileMap[id];
@@ -54,8 +57,22 @@ export default function MdArticlePage() {
           }
         }
 
-        const parsed = await marked.parse(md || "");
-        const safe = DOMPurify.sanitize(parsed as string);
+        // 使用 marked 转成 HTML，并启用 gfm / 自动换行
+        let parsed = (await marked.parse(md || "")) as string;
+
+        // 统一处理所有链接：没有 target 的 <a> 自动补上 target/_blank 和 rel
+        parsed = parsed.replace(
+          /<a\s+([^>]*href="[^"]+"[^>]*)>/g,
+          (match, attrs) => {
+            if (/target=/.test(attrs)) return match;
+            return `<a ${attrs} target="_blank" rel="noopener noreferrer">`;
+          },
+        );
+
+        // DOMPurify 默认可能会去掉 target，这里显式允许
+        const safe = DOMPurify.sanitize(parsed, {
+          ADD_ATTR: ["target", "rel"],
+        });
         setHtml(safe);
       } catch (err) {
         console.error("加载文章失败:", err);
@@ -97,8 +114,6 @@ export default function MdArticlePage() {
   const articleBg = isDark
     ? "bg-black/40 border border-gray-800"
     : "bg-white border border-gray-200";
-  const backLinkBg = isDark ? "bg-black/60" : "bg-white/80";
-  const backdrop = isDark ? "" : "backdrop-blur-sm";
 
   return (
     <main
