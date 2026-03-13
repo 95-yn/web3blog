@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
-import QRCodeStyling from 'qr-code-styling'
 
 export default function QrCodePage() {
   const { language, theme, mounted } = useLanguage()
@@ -17,43 +16,56 @@ export default function QrCodePage() {
   const [logo, setLogo] = useState<string | undefined>()
   const [logoSize, setLogoSize] = useState(0.4)
   const [margin, setMargin] = useState(0)
+  const [isClient, setIsClient] = useState(false)
   const qrRef = useRef<HTMLDivElement>(null)
-  const qrCode = useRef<QRCodeStyling>(new QRCodeStyling({
-    width: size,
-    height: size,
-    data: text || 'https://example.com',
-    image: '',
-    dotsOptions: {
-      color: qrColor,
-      type: dotStyle
-    },
-    backgroundOptions: {
-      color: bgColor
-    },
-    cornersSquareOptions: {
-      color: qrColor,
-      type: cornerStyle
-    },
-    cornersDotOptions: {
-      color: qrColor
-    },
-    qrOptions: {
-      errorCorrectionLevel: errorLevel
-    },
-    imageOptions: {
-      crossOrigin: 'anonymous',
-      margin: 10
-    }
-  }))
+  const qrCode = useRef<any>(null)
 
   useEffect(() => {
-    if (qrRef.current) {
-      qrRef.current.innerHTML = ''
-      qrCode.current.append(qrRef.current)
-    }
+    setIsClient(true)
   }, [])
 
   useEffect(() => {
+    if (!isClient) return
+    
+    const QRCode = require('qr-code-styling')
+    qrCode.current = new QRCode({
+      width: size,
+      height: size,
+      data: text || 'https://example.com',
+      image: '',
+      dotsOptions: {
+        color: qrColor,
+        type: dotStyle
+      },
+      backgroundOptions: {
+        color: bgColor
+      },
+      cornersSquareOptions: {
+        color: qrColor,
+        type: cornerStyle
+      },
+      cornersDotOptions: {
+        color: qrColor
+      },
+      qrOptions: {
+        errorCorrectionLevel: errorLevel
+      },
+      imageOptions: {
+        crossOrigin: 'anonymous',
+        margin: 10
+      }
+    })
+
+    return () => {
+      if (qrCode.current && qrRef.current) {
+        qrRef.current.innerHTML = ''
+      }
+    }
+  }, [isClient])
+
+  useEffect(() => {
+    if (!qrCode.current || !isClient) return
+    
     qrCode.current.update({
       width: size,
       height: size,
@@ -82,7 +94,14 @@ export default function QrCodePage() {
         imageSize: logoSize
       }
     })
-  }, [text, qrColor, bgColor, dotStyle, cornerStyle, errorLevel, size, logo, logoSize])
+  }, [text, qrColor, bgColor, dotStyle, cornerStyle, errorLevel, size, logo, logoSize, isClient])
+
+  useEffect(() => {
+    if (qrCode.current && qrRef.current && isClient) {
+      qrRef.current.innerHTML = ''
+      qrCode.current.append(qrRef.current)
+    }
+  }, [isClient])
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -96,6 +115,7 @@ export default function QrCodePage() {
   }
 
   const downloadQr = (format: 'png' | 'jpeg' | 'svg') => {
+    if (!qrCode.current) return
     qrCode.current.download({
       extension: format,
       name: 'qrcode'
@@ -194,6 +214,20 @@ export default function QrCodePage() {
   const btnPrimary = isDark ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border-cyan-500/30' : 'bg-blue-500 text-white hover:bg-blue-600'
   const btnSecondary = isDark ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
   const labelClass = `text-sm ${textSub} mb-1 block`
+
+  if (!isClient) {
+    return (
+      <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
+        <div className="max-w-6xl mx-auto">
+          <div className={`animate-pulse`}>
+            <div className={`h-8 w-32 ${isDark ? 'bg-gray-800' : 'bg-gray-200'} rounded mb-4`}></div>
+            <div className={`h-10 w-64 ${isDark ? 'bg-gray-800' : 'bg-gray-200'} rounded mb-2`}></div>
+            <div className={`h-6 w-48 ${isDark ? 'bg-gray-800' : 'bg-gray-200'} rounded mb-8`}></div>
+          </div>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
