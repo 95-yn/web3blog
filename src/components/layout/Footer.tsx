@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
+import { usePathname } from 'next/navigation'
 
 // 备案信息配置 - 在这里填写你的备案号
 const ICP_LICENSE = '辽ICP备2026004192号'  // 替换为你的ICP备案号
@@ -9,18 +10,25 @@ const COPYRIGHT_NAME = '一一'
 
 export default function Footer() {
   const { language, theme, mounted } = useLanguage()
+  const pathname = usePathname()
   const isDark = mounted ? theme === 'dark' : true
-  
   const isZh = language === 'zh'
+  
+  // 只在首页显示备案信息
+  const showFooter = pathname === '/'
 
   const footerBg = isDark ? 'bg-black/20 border-gray-800/30' : 'bg-gray-50 border-gray-200'
   const textColor = isDark ? 'text-gray-500' : 'text-gray-500'
   const linkColor = isDark ? 'text-gray-600 hover:text-cyan-400' : 'text-gray-500 hover:text-blue-600'
 
+  if (!showFooter) {
+    return null
+  }
+
   return (
-    <footer className={`py-6 px-4 border-t ${footerBg}`}>
+    <footer className={`py-4 px-4 border-t ${footerBg}`}>
       <div className="max-w-4xl mx-auto text-center">
-        <p className={`text-sm ${textColor} mb-2`}>
+        <p className={`text-sm ${textColor} mb-1`}>
           © {new Date().getFullYear()} {COPYRIGHT_NAME}. {isZh ? '保留所有权利' : 'All rights reserved.'}
         </p>
         
