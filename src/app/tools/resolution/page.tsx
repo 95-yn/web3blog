@@ -25,6 +25,8 @@ export default function ResolutionPage() {
   const [touchSupport, setTouchSupport] = useState(false)
   const [colorDepth, setColorDepth] = useState(0)
   const [pixelDepth, setPixelDepth] = useState(0)
+  const [availSize, setAvailSize] = useState({ width: 0, height: 0 })
+  const [pixelRatio, setPixelRatio] = useState(1)
 
   useEffect(() => {
     const updateResolution = () => {
@@ -41,6 +43,11 @@ export default function ResolutionPage() {
       setTouchSupport(('ontouchstart' in window) || (navigator.maxTouchPoints > 0))
       setColorDepth(window.screen.colorDepth)
       setPixelDepth(window.screen.pixelDepth)
+      setAvailSize({
+        width: window.screen.availWidth,
+        height: window.screen.availHeight
+      })
+      setPixelRatio(window.devicePixelRatio)
     }
 
     updateResolution()
@@ -113,7 +120,7 @@ export default function ResolutionPage() {
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.pixelRatio}</p>
-            <p className={`text-2xl font-bold ${textMain}`}>{window.devicePixelRatio}x</p>
+            <p className={`text-2xl font-bold ${textMain}`}>{pixelRatio}x</p>
           </div>
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
@@ -123,7 +130,7 @@ export default function ResolutionPage() {
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
             <p className={`text-sm ${textSub} mb-1`}>{t.availSize}</p>
-            <p className={`text-xl font-bold ${textMain}`}>{window.screen.availWidth} × {window.screen.availHeight}</p>
+            <p className={`text-xl font-bold ${textMain}`}>{availSize.width} × {availSize.height}</p>
           </div>
           
           <div className={`p-5 rounded-xl border ${cardBg} backdrop-blur-sm`}>
