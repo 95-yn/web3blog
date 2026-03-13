@@ -14,13 +14,13 @@ export default function ArticlesPage() {
   }[language];
 
   const bg = isDark ? "bg-[#000000]" : "bg-[#f8f8f8]";
-  const cardBg = isDark 
-    ? "bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50 shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/20" 
+  const cardBg = isDark
+    ? "bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50 shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/20"
     : "bg-white border border-gray-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10";
   const textMain = isDark ? "text-white" : "text-gray-900";
   const textSub = isDark ? "text-gray-400" : "text-gray-600";
-  const tagBg = isDark 
-    ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300" 
+  const tagBg = isDark
+    ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300"
     : "bg-blue-500/10 border-blue-500/30 text-blue-600";
   const linkText = isDark ? "text-cyan-400" : "text-blue-600";
 
@@ -30,12 +30,15 @@ export default function ArticlesPage() {
       title: language === "zh" ? a.title.zh : a.title.en,
       desc: language === "zh" ? a.description.zh : a.description.en,
     }))
-    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort(
+      (a: any, b: any) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime(),
+    );
 
   return (
     <main className={`min-h-screen ${bg} py-20 px-4 md:px-6`}>
       <div className="max-w-4xl mx-auto">
-        <h1 className={`text-3xl font-bold ${textMain} mb-2`}>{t.title}</h1>
+        <h1 className={`text-3xl font-bold ${textMain} mb-4`}>{t.title}</h1>
         <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
 
         <div className="space-y-4">

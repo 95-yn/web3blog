@@ -41,6 +41,62 @@
       },
       "date": "2018-11-01",
       "tags": ["iOS", "证书"]
+    },
+    {
+      "id": "4",
+      "slug": "source-map-intranet",
+      "title": {
+        "zh": "在内网部署 Source Map 调试线上问题",
+        "en": "Debugging Production with Intranet Source Maps"
+      },
+      "description": {
+        "zh": "介绍 Source Map 的常见类型，以及如何在不暴露源码的前提下，在内网部署 Source Map 调试线上问题。",
+        "en": "Explains common Source Map types and how to deploy them on an intranet to debug production issues without exposing source code."
+      },
+      "date": "2019-01-15",
+      "tags": ["前端", "SourceMap"]
+    },
+    {
+      "id": "5",
+      "slug": "webpack-sourcemap-upload-plugin",
+      "title": {
+        "zh": "编写 Webpack 插件自动上传 Source Map",
+        "en": "Writing a Webpack Plugin to Upload Source Maps"
+      },
+      "description": {
+        "zh": "记录如何通过一个简单的 Webpack 插件，在构建完成后自动遍历并上传 Source Map 到内网服务。",
+        "en": "Shows how to build a simple Webpack plugin that uploads Source Maps to an intranet service after builds complete."
+      },
+      "date": "2019-01-22",
+      "tags": ["前端", "Webpack", "SourceMap"]
+    },
+    {
+      "id": "6",
+      "slug": "sentry-intro-and-deploy",
+      "title": {
+        "zh": "Sentry 接入与部署踩坑记录",
+        "en": "Sentry Integration and Deployment Notes"
+      },
+      "description": {
+        "zh": "介绍 Sentry 能解决什么问题、前端接入方式，以及 SaaS 与自建部署时常见的实际问题和注意点。",
+        "en": "Covers what Sentry is used for, basic frontend integration steps, and common issues when deploying SaaS vs self-hosted Sentry."
+      },
+      "date": "2019-02-26",
+      "tags": ["前端", "监控", "Sentry"]
+    },
+    {
+      "id": "7",
+      "slug": "frontend-scaffold-cli",
+      "title": {
+        "zh": "前端脚手架开发的一次实践",
+        "en": "A Practical Note on Frontend Scaffold CLI"
+      },
+      "description": {
+        "zh": "记录一次前端脚手架（CLI）开发的思路和实现，包括命令设计、交互问答、模板管理和生成流程。",
+        "en": "Notes on building a frontend scaffold CLI: command design, interactive prompts, template management, and project generation workflow."
+      },
+      "date": "2019-05-10",
+      "tags": ["前端", "脚手架", "CLI"]
     }
   ]
 }

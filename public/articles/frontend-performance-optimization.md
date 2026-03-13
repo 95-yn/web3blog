@@ -1,8 +1,6 @@
-# 如何系统性的完成前端性能优化
-
 <!-- meta: id=1; date=2025-11-11; tags=前端,性能优化 -->
 
-<a href="https://juejin.cn/post/7570904968678440987" target="_blank" rel="noopener noreferrer">掘金地址</a>
+文章发表在<a href="https://juejin.cn/post/7570904968678440987" target="_blank" rel="noopener noreferrer">掘金</a>
 
 <div class="article-viewer markdown-body result"><h2 data-id="heading-0">如何系统性地完成前端性能优化</h2>
 <h3 data-id="heading-1">开篇</h3>
@@ -51,7 +49,7 @@
 <li>✅ 方案：
 <ul>
 <li>图片压缩（使用 WebP/AVIF 格式，压缩率提升 30-50%）</li>
-<li>使用 <code><img></code> 的 <code>fetchpriority="high"</code> 提升加载优先级</li>
+<li>使用 <code> img </code> 的 <code>fetchpriority="high"</code> 提升加载优先级</li>
 <li>响应式图片（<code>srcset</code> + <code>sizes</code>）根据设备加载合适尺寸</li>
 <li>CDN 加速，就近访问降低 TTFB</li>
 </ul>
