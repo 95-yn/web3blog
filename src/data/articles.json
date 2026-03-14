@@ -1,19 +1,6 @@
 {
   "articles": [
-    {
-      "id": "1",
-      "slug": "frontend-performance-optimization",
-      "title": {
-        "zh": "前端性能优化：思路、防御与监控选型",
-        "en": "Frontend Performance Optimization: Strategy & Monitoring"
-      },
-      "description": {
-        "zh": "系统梳理前端性能优化思路、分片方案、防御机制与监控系统选型实践。",
-        "en": "A systematic overview of frontend performance optimization, task slicing, defense mechanisms, and monitoring options."
-      },
-      "date": "2025-10-11",
-      "tags": ["前端", "性能优化"]
-    },
+    
     {
       "id": "2",
       "slug": "jquery-basics",
@@ -209,6 +196,20 @@
       },
       "date": "2024-12-14",
       "tags": ["Web3", "DApp", "以太坊", "智能合约", "RainbowKit", "ethers", "Hardhat"]
+    },
+    {
+      "id": "16",
+      "slug": "frontend-performance-optimization",
+      "title": {
+        "zh": "前端性能优化：思路、防御与监控选型",
+        "en": "Frontend Performance Optimization: Strategy & Monitoring"
+      },
+      "description": {
+        "zh": "系统梳理前端性能优化思路、分片方案、防御机制与监控系统选型实践。",
+        "en": "A systematic overview of frontend performance optimization, task slicing, defense mechanisms, and monitoring options."
+      },
+      "date": "2025-10-11",
+      "tags": ["前端", "性能优化"]
     }
   ]
 }
