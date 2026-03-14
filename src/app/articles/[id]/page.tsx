@@ -8,6 +8,8 @@ import DOMPurify from "dompurify";
 import { useLanguage } from "@/context/LanguageContext";
 import articlesData from "@/data/articles.json";
 
+marked.setOptions({ gfm: true, breaks: true });
+
 // 从 JSON 读取文章 slug 到文件名的映射（顶层常量，避免 useEffect 依赖告警）
 const idToFileMap: Record<string, string> = articlesData.articles.reduce(
   (acc: Record<string, string>, article: any) => {
@@ -57,7 +59,7 @@ export default function MdArticlePage() {
           }
         }
 
-        // 使用 marked 转成 HTML，并启用 gfm / 自动换行
+        // 使用 marked 转成 HTML（gfm 已在模块顶设置，含表格）
         let parsed = (await marked.parse(md || "")) as string;
 
         // 统一处理所有链接：没有 target 的 <a> 自动补上 target/_blank 和 rel

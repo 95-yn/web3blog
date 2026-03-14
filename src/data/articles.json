@@ -97,6 +97,118 @@
       },
       "date": "2019-05-10",
       "tags": ["前端", "脚手架", "CLI"]
+    },
+    {
+      "id": "8",
+      "slug": "puppeteer-certificate-screenshot-service",
+      "title": {
+        "zh": "用 Puppeteer + Node 做证书截图服务",
+        "en": "Certificate Screenshot Service with Puppeteer and Node"
+      },
+      "description": {
+        "zh": "考试证书通过背景图加定位渲染，用 Node 启动 Puppeteer 做异步截图，渲染证书时直接产出图片的实践。",
+        "en": "Using Node and Puppeteer to build an async screenshot service for exam certificates rendered with background image and positioning; output images directly for display."
+      },
+      "date": "2020-04-15",
+      "tags": ["Node", "Puppeteer", "截图", "证书"]
+    },
+    {
+      "id": "9",
+      "slug": "certificate-template-lowcode",
+      "title": {
+        "zh": "用低代码搭了一套证书模板系统",
+        "en": "Building a Low-Code Certificate Template System"
+      },
+      "description": {
+        "zh": "班级、考试活动带来多种证书与自定义样式需求，用低代码搭建证书模板系统，与 Puppeteer 截图服务对接产出图片。",
+        "en": "As classes and exam activities required various certificate types and custom styles, we built a low-code certificate template system that integrates with the Puppeteer screenshot service to output images."
+      },
+      "date": "2020-12-19",
+      "tags": ["低代码", "证书", "模板"]
+    },
+    {
+      "id": "10",
+      "slug": "frontend-perf-monitoring-sdk",
+      "title": {
+        "zh": "如何从 0 到 1 搭建前端性能监控 SDK",
+        "en": "Building a Frontend Performance Monitoring SDK from Scratch"
+      },
+      "description": {
+        "zh": "梳理前端性能监控 SDK 的目标、数据来源（Performance API、PerformanceObserver）、设计与实现步骤，便于自建采集与上报。",
+        "en": "A practical guide to building a frontend performance monitoring SDK: what to measure, data sources (Performance API, PerformanceObserver), design and implementation steps."
+      },
+      "date": "2022-01-04",
+      "tags": ["前端", "性能监控", "SDK", "Web Vitals", "异常监控"]
+    },
+    {
+      "id": "11",
+      "slug": "business-component-utils-library",
+      "title": {
+        "zh": "从技术分享到落地：业务组件库与通用函数库搭建",
+        "en": "From Tech Share to Practice: Building a Business Component Library and Shared Utils"
+      },
+      "description": {
+        "zh": "基于内部「如何提高代码稳定性」分享中的代码分层思路，落地业务组件库与通用函数库，并解决公用组件无测试、新组件目录不清等问题。",
+        "en": "After an internal talk on code layering for stability, we built a business component library and shared utils library, and addressed missing tests and unclear directory conventions."
+      },
+      "date": "2022-09-15",
+      "tags": ["前端", "组件库", "工程化", "代码分层"]
+    },
+    {
+      "id": "12",
+      "slug": "monitoring-rrweb-integration",
+      "title": {
+        "zh": "监控平台接入 rrweb：从周会到落地的记录",
+        "en": "Integrating rrweb into the Monitoring Platform: From Weekly Meeting to Production"
+      },
+      "description": {
+        "zh": "监控平台接入 rrweb 的踩坑记录：敏感信息与法务、数据裁剪与压缩、过期机制、JS 与 Go/C++ 的 ECC 加密互通。",
+        "en": "Pitfalls and lessons from integrating rrweb into the monitoring platform: sensitive data compliance, trimming and compression, expiration, and ECC interoperability (JS, Go, C++)."
+      },
+      "date": "2023-01-06",
+      "tags": ["前端", "监控", "rrweb", "录制回放", "加密"]
+    },
+    {
+      "id": "13",
+      "slug": "lowcode-page-builder-component-api",
+      "title": {
+        "zh": "基于业务组件库的低代码页面搭建：组件与 API 适配，零开发搭页面",
+        "en": "Low-Code Page Builder on Top of Business Component Library: Component–API Mapping, No Dev Required"
+      },
+      "description": {
+        "zh": "基于业务组件库与现有 API 做组件与接口一对多适配，支持数据源一键拉取/导入/手动添加、枚举配置、三列配置界面与模板功能，无需开发即可完成页面搭建。",
+        "en": "Component–API one-to-many mapping using the business component library and existing APIs; data source fetch/import/manual add, enum config, three-column config UI, and templates for zero-dev page building."
+      },
+      "date": "2023-06-01",
+      "tags": ["前端", "低代码", "组件库", "页面搭建"]
+    },
+    {
+      "id": "14",
+      "slug": "web3-wallet-mnemonic-keystore",
+      "title": {
+        "zh": "Web3 浏览器钱包：助记词、私钥存储与用户密码",
+        "en": "Web3 Browser Wallets: Mnemonic, Key Storage, and User Password"
+      },
+      "description": {
+        "zh": "介绍 Web3 浏览器钱包的助记词生成（BIP-39）、私钥存储机制（种子派生、Keystore、vault）以及用户密码的作用与边界。",
+        "en": "An intro to mnemonic generation (BIP-39), private key storage (seed derivation, Keystore, vault), and the role of the user password in Web3 browser wallets."
+      },
+      "date": "2023-12-10",
+      "tags": ["Web3", "钱包", "助记词", "私钥"]
+    },
+    {
+      "id": "15",
+      "slug": "dapp-from-zero-to-one",
+      "title": {
+        "zh": "从 0 到 1 搭建一个 DApp：技术选型、踩坑与实战",
+        "en": "Building a DApp from 0 to 1: Tech Stack, Pitfalls, and Practice"
+      },
+      "description": {
+        "zh": "从技术选型、常用技术栈、实际搭建流程、踩坑、成本、性能优化、稳定性、学习成本到 Web3 常用组件库，梳理一条可落地的 DApp 搭建路径。",
+        "en": "A practical guide to building a DApp: tech stack selection, common combinations, step-by-step workflow, pitfalls, cost, performance, stability, learning curve, and common Web3 libraries."
+      },
+      "date": "2024-12-14",
+      "tags": ["Web3", "DApp", "以太坊", "智能合约", "RainbowKit", "ethers", "Hardhat"]
     }
   ]
 }

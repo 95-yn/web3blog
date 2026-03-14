@@ -320,6 +320,58 @@ h1, h2, h3 {
   padding-left: 1.4em;
 }
 
+/* 文章内表格：边框、间距、横向滚动（保留表格布局） */
+.article-content.prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.article-content.prose thead {
+  display: table-header-group;
+  border-bottom: 2px solid currentColor;
+}
+
+.article-content.prose tbody {
+  display: table-row-group;
+}
+
+.article-content.prose tr {
+  display: table-row;
+}
+
+.article-content.prose th,
+.article-content.prose td {
+  display: table-cell;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid currentColor;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-content.prose th {
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.article-content.prose tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* 深色模式表格 */
+.article-content.prose-invert th {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.article-content.prose-invert tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* 编辑器中的标题间距 */
 .tiptap h1,
 .tiptap h2,

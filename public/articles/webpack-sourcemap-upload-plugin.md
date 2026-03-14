@@ -1,7 +1,5 @@
 # 编写 Webpack 插件，在构建后自动上传 Source Map
 
-<!-- meta: id=5; date=2019-01-22; tags=前端,Webpack,SourceMap -->
-
 在上一篇里聊了怎么在内网部署 Source Map 调试线上问题，这篇记录一下「怎么用一个简单的 Webpack 插件，在构建完成后自动上传 Sourcemap」，避免每次手动拷贝 / 上传。
 
 目标很简单：

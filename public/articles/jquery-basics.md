@@ -1,7 +1,5 @@
 # jQuery 基本用法入门
 
-<!-- meta: id=2; date=2018-09-19; tags=jQuery,基础 -->
-
 最近在使用jQuery，通过几个常见的业务场景，分享下jQuery常用的API
 
 ---
