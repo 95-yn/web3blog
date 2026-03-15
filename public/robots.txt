@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.yyyyn.cn/sitemap.xml
+
+# Disallow admin/private pages
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /posts/new
+Disallow: /posts/*/edit
