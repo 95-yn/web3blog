@@ -20,7 +20,7 @@
 
 我们先看下 Google 提出的 [Web Vitals 核心指标](https://web.dev/articles/vitals?hl=zh-cn)，这是业界公认的用户体验度量标准：
 
-![Web Vitals核心指标](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/5d743f37abc0492b8d3f8834c0b72797~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5LiA5LiA5ZWK:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTIyMjMxMjY2MDMxNDM5NyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1774008436&x-orig-sign=xtTXrY8ucyxSuD0PXityqvUpjrk%3D)
+![Web Vitals核心指标](/images/web-vitals-core-metrics.webp)
 
 **通常我们说的"性能有问题"，本质上可以归纳为三大类型，分别对应 Core Web Vitals 的三个核心指标。理解这三个指标，就能精准定位问题根源：**
 
@@ -50,7 +50,7 @@
 
 这说明**首屏骨架渲染正常，但关键内容加载慢**，问题通常出在：
 
-![FCP达标LCP未达标](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/504aedadbc234eaeb65268c39d92de68~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5LiA5LiA5ZWK:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTIyMjMxMjY2MDMxNDM5NyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1774008436&x-orig-sign=4uMocZRN%2Fi3giyi3wGaVciV%2F4II%3D)
+![FCP达标LCP未达标](/images/fcp-ok-lcp-fail.webp)
 
 **核心问题点**：
 
@@ -89,7 +89,7 @@
 
 这说明**整个页面加载链路都存在问题**，需要全面优化：
 
-![FCP和LCP均未达标](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/79749336bd454f34bf6b0584f5aa4b69~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5LiA5LiA5ZWK:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTIyMjMxMjY2MDMxNDM5NyJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1774008436&x-orig-sign=QkhEkZNCUMx8eFU9q8cNgDhqtq8%3D)
+![FCP和LCP均未达标](/images/fcp-lcp-both-fail.webp)
 
 **核心问题点**：
 
