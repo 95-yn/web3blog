@@ -94,6 +94,7 @@ export default function MarkdownLivePreview({
   const border = isDark ? 'border-gray-700' : 'border-gray-200'
   const inputBg = isDark ? 'bg-black/40 text-gray-100' : 'bg-white text-gray-900'
   const previewBg = isDark ? 'bg-black/30' : 'bg-white'
+  const previewText = isDark ? '' : 'text-gray-800' // 浅色模式下需要深色文字
 
   return (
     <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4 h-[calc(100vh-12rem)] min-h-[420px] ${className}`}>
@@ -115,7 +116,7 @@ export default function MarkdownLivePreview({
         </div>
         <div
           ref={previewRef}
-          className={`flex-1 overflow-auto p-4 prose prose-sm max-w-none ${previewBg} ${isDark ? 'prose-invert' : ''} markdown-preview`}
+          className={`flex-1 overflow-auto p-4 prose prose-sm max-w-none ${previewBg} ${previewText} ${isDark ? 'prose-invert' : ''} markdown-preview`}
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>

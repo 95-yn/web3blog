@@ -210,6 +210,20 @@
       },
       "date": "2025-10-11",
       "tags": ["前端", "性能优化"]
+    },
+    {
+      "id": "17",
+      "slug": "cursor-skills-guide",
+      "title": {
+        "zh": "我是怎么给 Cursor 写 Skills 的",
+        "en": "How I Wrote Skills for Cursor"
+      },
+      "description": {
+        "zh": "记录给 Cursor 编写 Agent Skill 的思考过程与设计决策，包括 description 怎么写、内容怎么拆、文件怎么组织。",
+        "en": "Notes on writing Agent Skills for Cursor: thinking process, design decisions, how to write descriptions, structure content, and organize files."
+      },
+      "date": "2026-03-25",
+      "tags": ["Cursor", "AI", "Skill", "效率"]
     }
   ]
 }
