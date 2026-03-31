@@ -422,7 +422,7 @@ export default function DomeGallery({
         if (last) {
           draggingRef.current = false;
 
-          let [vMagX] = velocity;
+          const [vMagX] = velocity;
           const [dirX, dirY] = direction;
           let vx = vMagX * dirX;
           let vy = velocity[1] * dirY;
