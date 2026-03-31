@@ -3,11 +3,15 @@
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 import { useEffect, useState, ReactNode } from 'react'
+import BlurText from '@/components/reactbits/BlurText'
+import AnimatedContent from '@/components/reactbits/AnimatedContent'
+import SpotlightCard from '@/components/reactbits/SpotlightCard'
 
 interface Tool {
   zh: { name: string; desc: string };
   en: { name: string; desc: string };
   href: string;
+  gradient: string;
 }
 
 export default function ToolsPage() {
@@ -15,7 +19,6 @@ export default function ToolsPage() {
   const isDark = mounted ? theme === 'dark' : true
   const [isClient, setIsClient] = useState(false)
 
-  // 防止 hydration 不匹配，同时保持客户端状态
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -29,40 +32,40 @@ export default function ToolsPage() {
     {
       zh: { name: '屏幕分辨率检测', desc: '实时显示您的屏幕分辨率信息' },
       en: { name: 'Screen Resolution', desc: 'Display your screen resolution in real-time' },
-      href: '/tools/resolution'
+      href: '/tools/resolution',
+      gradient: isDark ? 'from-cyan-500/20 to-transparent' : 'from-blue-500/10 to-transparent',
     },
     {
       zh: { name: 'JSON 格式化工具', desc: '在线 JSON 格式化、压缩、验证' },
       en: { name: 'JSON Formatter', desc: 'Format, minify and validate JSON online' },
-      href: '/tools/json-format'
+      href: '/tools/json-format',
+      gradient: isDark ? 'from-blue-500/20 to-transparent' : 'from-violet-500/10 to-transparent',
     },
     {
       zh: { name: '图片裁剪工具', desc: '上传图片并裁剪所需区域' },
       en: { name: 'Image Cropper', desc: 'Upload and crop your image' },
-      href: '/tools/image-crop'
+      href: '/tools/image-crop',
+      gradient: isDark ? 'from-purple-500/20 to-transparent' : 'from-pink-500/10 to-transparent',
     },
     {
       zh: { name: '二维码生成器', desc: '自定义颜色、样式、Logo' },
       en: { name: 'QR Code Generator', desc: 'Custom colors, styles and logo' },
-      href: '/tools/qrcode'
+      href: '/tools/qrcode',
+      gradient: isDark ? 'from-emerald-500/20 to-transparent' : 'from-emerald-500/10 to-transparent',
     },
     {
       zh: { name: 'Markdown 实时预览', desc: '左侧编写 Markdown，右侧实时预览' },
       en: { name: 'Markdown Live Preview', desc: 'Write Markdown on the left, preview on the right' },
-      href: '/tools/markdown-preview'
+      href: '/tools/markdown-preview',
+      gradient: isDark ? 'from-amber-500/20 to-transparent' : 'from-amber-500/10 to-transparent',
     }
   ]
 
-  const bg = isDark ? 'bg-[#000000]' : 'bg-[#f8f8f8]'
-  const cardBg = isDark 
-    ? 'bg-gradient-to-br from-gray-900/80 to-black/60 border border-cyan-500/20 hover:border-cyan-500/50 shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/20' 
-    : 'bg-white border border-gray-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10'
   const textMain = isDark ? 'text-white' : 'text-gray-900'
   const textSub = isDark ? 'text-gray-400' : 'text-gray-600'
   const iconBg = isDark ? 'bg-cyan-500/10 text-cyan-400' : 'bg-blue-500/10 text-blue-500'
   const titleHover = isDark ? 'group-hover:text-cyan-400' : 'group-hover:text-blue-600'
 
-  // 工具图标
   const toolIcons: Record<string, ReactNode> = {
     '/tools/resolution': (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,33 +95,54 @@ export default function ToolsPage() {
   }
 
   return (
-    <main className={`min-h-screen ${bg} py-20 px-4 md:px-8`}>
+    <main className={`min-h-screen ${isDark ? 'bg-[#000000]' : 'bg-[#f8f8f8]'} py-20 px-4 md:px-8`}>
       <div className="max-w-4xl mx-auto">
-        <h1 className={`text-3xl font-bold ${textMain} mb-4`}>{t.title}</h1>
-        <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
+        <BlurText
+          text={t.title}
+          className={`text-3xl font-bold mb-2 ${textMain}`}
+          delay={100}
+          animateBy="letters"
+          direction="top"
+          stepDuration={0.3}
+        />
+        <AnimatedContent distance={15} duration={0.4} delay={0.2}>
+          <p className={`text-sm ${textSub} mb-8`}>{t.desc}</p>
+        </AnimatedContent>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {tools.map((tool, index) => (
-            <Link 
+            <AnimatedContent
               key={index}
-              href={tool.href}
-              prefetch={true}
-              className={`p-6 rounded-xl border ${cardBg} backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] group`}
+              distance={25}
+              duration={0.4}
+              delay={index * 0.06}
+              threshold={0.05}
             >
-              <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-lg ${iconBg} group-hover:scale-110 transition-transform duration-300`}>
-                  {toolIcons[tool.href]}
-                </div>
-                <div>
-                  <h2 className={`text-lg font-medium ${textMain} mb-1 ${titleHover} transition-colors`}>
-                    {language === 'zh' ? tool.zh.name : tool.en.name}
-                  </h2>
-                  <p className={`text-sm ${textSub}`}>
-                    {language === 'zh' ? tool.zh.desc : tool.en.desc}
-                  </p>
-                </div>
-              </div>
-            </Link>
+              <SpotlightCard
+                className={`rounded-xl border ${isDark ? 'border-cyan-500/10 hover:border-cyan-500/40' : 'border-gray-200 hover:border-blue-400'} transition-all duration-300 hover:scale-[1.03] hover:-translate-y-0.5 bg-gradient-to-br ${tool.gradient} ${isDark ? 'shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/15' : 'shadow-sm hover:shadow-lg hover:shadow-blue-500/10'}`}
+                spotlightColor={isDark ? 'rgba(0, 212, 255, 0.12)' : 'rgba(59, 130, 246, 0.08)'}
+              >
+                <Link 
+                  href={tool.href}
+                  prefetch={true}
+                  className="block p-6 group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3 rounded-lg ${iconBg} group-hover:scale-110 transition-transform duration-300`}>
+                      {toolIcons[tool.href]}
+                    </div>
+                    <div>
+                      <h2 className={`text-lg font-medium ${textMain} mb-1 ${titleHover} transition-colors`}>
+                        {language === 'zh' ? tool.zh.name : tool.en.name}
+                      </h2>
+                      <p className={`text-sm ${textSub}`}>
+                        {language === 'zh' ? tool.zh.desc : tool.en.desc}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </SpotlightCard>
+            </AnimatedContent>
           ))}
         </div>
       </div>
