@@ -33,8 +33,7 @@ export default function AboutPage() {
       title: "个人介绍",
       name: "一一",
       role: "全栈开发者",
-      intro:
-        "白天调性能、拆架构，晚上跟 AI 对线。一个被代码耽误的自驾爱好者，自驾过 200+ 城市，debug 过更多的 bug。",
+      intro: "一个喜欢折腾的人。",
       contact: "联系方式",
       phone: "电话",
       wechat: "微信",
@@ -46,8 +45,7 @@ export default function AboutPage() {
       title: "About",
       name: "Yiyi",
       role: "Full-stack Developer",
-      intro:
-        "Tuning performance by day, arguing with AI by night. A road-trip lover disguised as a developer — 200+ cities driven, mass bugs debugged.",
+      intro: "A person who loves tinkering.",
       contact: "Contact",
       phone: "Phone",
       wechat: "WeChat",

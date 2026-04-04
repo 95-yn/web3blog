@@ -8,8 +8,8 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Home() {
   const { language, theme, mounted } = useLanguage();
   const t = {
-    zh: { title: "一一的空间", welcome: "欢迎来到一一的空间", subtitle: "记录学习与思考的足迹", intro: "白天调性能、拆架构，晚上跟 AI 对线。一个被代码耽误的自驾爱好者，自驾过 200+ 城市，debug 过更多的 bug。" },
-    en: { title: "Yiyi's Space", welcome: "Welcome to Yiyi's Space", subtitle: "Notes on Learning and Thinking", intro: "Tuning performance by day, arguing with AI by night. A road-trip lover disguised as a developer — 200+ cities driven, mass bugs debugged." }
+    zh: { title: "一一的空间", welcome: "欢迎来到一一的空间", subtitle: "记录学习与思考的足迹", intro: "一个喜欢折腾的人。" },
+    en: { title: "Yiyi's Space", welcome: "Welcome to Yiyi's Space", subtitle: "Notes on Learning and Thinking", intro: "A person who loves tinkering." }
   }[language];
 
   const displayTheme = mounted ? theme : 'dark';
