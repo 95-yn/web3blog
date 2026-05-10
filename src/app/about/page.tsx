@@ -230,7 +230,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className={`text-xs ${textSub}`}>{t.phone}</p>
-                  <p className={`text-sm ${textMain}`}>19186879540</p>
+                  <p className={`text-sm ${textMain}`}>17665219000</p>
                 </div>
               </div>
 
@@ -255,7 +255,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className={`text-xs ${textSub}`}>{t.wechat}</p>
-                  <p className={`text-sm ${textMain}`}>19186879540</p>
+                  <p className={`text-sm ${textMain}`}>17665219000</p>
                 </div>
               </div>
 

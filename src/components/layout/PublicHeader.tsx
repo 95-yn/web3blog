@@ -40,13 +40,25 @@ export default function PublicHeader() {
   const activeColor = isDark ? "text-cyan-400" : "text-blue-600";
   const activeBorder = isDark ? "border-cyan-400" : "border-blue-600";
 
-  const navLinks = [
+  const navLinks: Array<{
+    href: string;
+    zh: string;
+    en: string;
+    external?: boolean;
+  }> = [
+    {
+      href: "http://175.24.198.10/",
+      zh: "协同文档",
+      en: "Collaborative docs",
+      external: true,
+    },
     { href: "/articles", zh: "文章", en: "Articles" },
     { href: "/tools", zh: "小工具", en: "Tools" },
     { href: "/about", zh: "个人介绍", en: "About" },
   ];
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   return (
     <nav
@@ -71,22 +83,36 @@ export default function PublicHeader() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`relative text-sm py-1 transition-colors focus:outline-none ${
-                isActive(link.href)
-                  ? `${activeColor} font-medium`
-                  : `${textColor} ${hoverColor}`
-              }`}
-            >
-              {language === "zh" ? link.zh : link.en}
-              {isActive(link.href) && (
-                <span className={`absolute -bottom-[1px] left-0 right-0 h-[2px] ${isDark ? 'bg-cyan-400' : 'bg-blue-600'} rounded-full`} />
-              )}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`relative text-sm py-1 transition-colors focus:outline-none ${textColor} ${hoverColor}`}
+              >
+                {language === "zh" ? link.zh : link.en}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative text-sm py-1 transition-colors focus:outline-none ${
+                  isActive(link.href)
+                    ? `${activeColor} font-medium`
+                    : `${textColor} ${hoverColor}`
+                }`}
+              >
+                {language === "zh" ? link.zh : link.en}
+                {isActive(link.href) && (
+                  <span
+                    className={`absolute -bottom-[1px] left-0 right-0 h-[2px] ${isDark ? "bg-cyan-400" : "bg-blue-600"} rounded-full`}
+                  />
+                )}
+              </Link>
+            ),
+          )}
           <div className="flex items-center gap-2">
             <button
               onClick={toggleLanguage}
@@ -137,20 +163,33 @@ export default function PublicHeader() {
       {mobileMenuOpen && (
         <div className={`md:hidden ${menuBg} border-t ${borderColor}`}>
           <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`block py-2 focus:outline-none ${
-                  isActive(link.href)
-                    ? `${activeColor} font-medium border-l-2 ${activeBorder} pl-3`
-                    : `${textColor} ${hoverColor} pl-3`
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {language === "zh" ? link.zh : link.en}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block py-2 focus:outline-none ${textColor} ${hoverColor} pl-3`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {language === "zh" ? link.zh : link.en}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`block py-2 focus:outline-none ${
+                    isActive(link.href)
+                      ? `${activeColor} font-medium border-l-2 ${activeBorder} pl-3`
+                      : `${textColor} ${hoverColor} pl-3`
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {language === "zh" ? link.zh : link.en}
+                </Link>
+              ),
+            )}
             <div className="flex gap-2 pt-2">
               <button
                 onClick={toggleLanguage}
