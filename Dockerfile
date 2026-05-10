@@ -6,7 +6,8 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# 与 .github/workflows 中 pnpm@9 一致；pnpm@11+ 需 Node 22+（node:sqlite）
+RUN corepack enable && corepack prepare pnpm@9 --activate
 RUN pnpm install --frozen-lockfile --prod=false
 
 # ============================================
@@ -19,7 +20,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json pnpm-lock.yaml ./
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9 --activate
 COPY . .
 RUN pnpm build
 
