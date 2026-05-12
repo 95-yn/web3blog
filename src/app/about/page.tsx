@@ -35,8 +35,6 @@ export default function AboutPage() {
       role: "全栈开发者",
       intro: "一个喜欢折腾的人。",
       contact: "联系方式",
-      phone: "电话",
-      wechat: "微信",
       email: "邮箱",
       hobbies: "爱好",
       skills: "技术栈",
@@ -47,8 +45,6 @@ export default function AboutPage() {
       role: "Full-stack Developer",
       intro: "A person who loves tinkering.",
       contact: "Contact",
-      phone: "Phone",
-      wechat: "WeChat",
       email: "Email",
       hobbies: "Hobbies",
       skills: "Tech Stack",
@@ -206,60 +202,7 @@ export default function AboutPage() {
             <h3 className={`text-lg font-medium ${textMain} mb-4`}>
               {t.contact}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Phone */}
-              <div
-                className={`flex items-center gap-3 p-3 rounded-lg ${isDark ? "bg-cyan-500/5" : "bg-blue-500/5"}`}
-              >
-                <div
-                  className={`p-2 rounded-lg ${isDark ? "bg-cyan-500/10" : "bg-blue-500/10"}`}
-                >
-                  <svg
-                    className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-blue-500"}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className={`text-xs ${textSub}`}>{t.phone}</p>
-                  <p className={`text-sm ${textMain}`}>19186879540</p>
-                </div>
-              </div>
-
-              {/* WeChat */}
-              <div
-                className={`flex items-center gap-3 p-3 rounded-lg ${isDark ? "bg-green-500/5" : "bg-green-500/5"}`}
-              >
-                <div className="p-2 rounded-lg bg-green-500/10">
-                  <svg
-                    className="w-5 h-5 text-green-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className={`text-xs ${textSub}`}>{t.wechat}</p>
-                  <p className={`text-sm ${textMain}`}>19186879540</p>
-                </div>
-              </div>
-
-              {/* Email */}
+            <div className="max-w-md">
               <div
                 className={`flex items-center gap-3 p-3 rounded-lg ${isDark ? "bg-cyan-500/5" : "bg-blue-500/5"}`}
               >
